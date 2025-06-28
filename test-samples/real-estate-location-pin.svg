@@ -1,0 +1,271 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" 
+     viewBox="0 0 300 300" 
+     width="300" 
+     height="300">
+    
+    <!-- Background -->
+    <rect width="300" height="300" fill="#f0fff0"/>
+    
+    <!-- Map Pin Base -->
+    <ellipse cx="150" cy="160" rx="40" ry="50" 
+             fill="#ff4500" 
+             stroke="#dc143c" 
+             stroke-width="3">
+        <!-- Gentle pulsing animation -->
+        <animateTransform 
+            attributeName="transform"
+            type="scale"
+            values="1;1.1;1"
+            dur="2s"
+            repeatCount="indefinite"/>
+    </ellipse>
+    
+    <!-- Map Pin Point -->
+    <polygon points="150,200 135,180 165,180" 
+             fill="#dc143c">
+        <!-- Point emphasis -->
+        <animateTransform 
+            attributeName="transform"
+            type="scale"
+            values="1;1.1;1"
+            dur="2s"
+            repeatCount="indefinite"/>
+    </polygon>
+    
+    <!-- Inner House Icon -->
+    <g transform="translate(135, 140)">
+        <!-- House base -->
+        <rect x="0" y="10" width="30" height="20" 
+              fill="white" 
+              stroke="#4a4a4a" 
+              stroke-width="1"/>
+        
+        <!-- Roof -->
+        <polygon points="0,10 15,0 30,10" 
+                 fill="#4169e1" 
+                 stroke="#000080" 
+                 stroke-width="1"/>
+        
+        <!-- Door -->
+        <rect x="12" y="20" width="6" height="10" 
+              fill="#654321"/>
+        
+        <!-- Windows -->
+        <rect x="4" y="15" width="4" height="4" 
+              fill="#87ceeb"/>
+        <rect x="22" y="15" width="4" height="4" 
+              fill="#87ceeb"/>
+        
+        <!-- House glow effect -->
+        <animate attributeName="opacity" 
+                 values="0.9;1;0.9" 
+                 dur="3s" 
+                 repeatCount="indefinite"/>
+    </g>
+    
+    <!-- Ripple Effect Around Pin -->
+    <g>
+        <circle cx="150" cy="180" r="50" 
+                fill="none" 
+                stroke="#ff4500" 
+                stroke-width="2" 
+                opacity="0">
+            <animate attributeName="r" 
+                     values="40;80;40" 
+                     dur="3s" 
+                     repeatCount="indefinite"/>
+            <animate attributeName="opacity" 
+                     values="0.8;0;0.8" 
+                     dur="3s" 
+                     repeatCount="indefinite"/>
+        </circle>
+        
+        <circle cx="150" cy="180" r="60" 
+                fill="none" 
+                stroke="#ff6347" 
+                stroke-width="1" 
+                opacity="0">
+            <animate attributeName="r" 
+                     values="50;90;50" 
+                     dur="3s" 
+                     begin="1s"
+                     repeatCount="indefinite"/>
+            <animate attributeName="opacity" 
+                     values="0.6;0;0.6" 
+                     dur="3s" 
+                     begin="1s"
+                     repeatCount="indefinite"/>
+        </circle>
+    </g>
+    
+    <!-- Simplified Map Background -->
+    <g opacity="0.3">
+        <!-- Roads -->
+        <line x1="0" y1="250" x2="300" y2="250" 
+              stroke="#888" 
+              stroke-width="4"/>
+        <line x1="100" y1="200" x2="100" y2="300" 
+              stroke="#888" 
+              stroke-width="3"/>
+        <line x1="200" y1="200" x2="200" y2="300" 
+              stroke="#888" 
+              stroke-width="3"/>
+        
+        <!-- Other buildings (simple rectangles) -->
+        <rect x="50" y="220" width="15" height="25" fill="#b0c4de"/>
+        <rect x="70" y="215" width="12" height="30" fill="#dda0dd"/>
+        <rect x="220" y="225" width="18" height="20" fill="#f0e68c"/>
+        <rect x="245" y="210" width="20" height="35" fill="#98fb98"/>
+        
+        <!-- Trees -->
+        <circle cx="30" cy="270" r="8" fill="#90ee90"/>
+        <circle cx="270" cy="275" r="6" fill="#90ee90"/>
+        <circle cx="125" cy="265" r="7" fill="#90ee90"/>
+    </g>
+    
+    <!-- GPS Coordinates Display -->
+    <rect x="20" y="20" width="120" height="30" 
+          fill="rgba(0,0,0,0.7)" 
+          stroke="#ccc" 
+          stroke-width="1" 
+          rx="5">
+        <!-- Subtle glow -->
+        <animate attributeName="fill" 
+                 values="rgba(0,0,0,0.7);rgba(0,0,0,0.8);rgba(0,0,0,0.7)" 
+                 dur="4s" 
+                 repeatCount="indefinite"/>
+    </rect>
+    
+    <text x="80" y="32" 
+          text-anchor="middle" 
+          font-family="monospace" 
+          font-size="8" 
+          fill="white">
+        GPS: 40.7128°N
+    </text>
+    <text x="80" y="44" 
+          text-anchor="middle" 
+          font-family="monospace" 
+          font-size="8" 
+          fill="white">
+        74.0060°W
+        <animate attributeName="opacity" 
+                 values="0.8;1;0.8" 
+                 dur="2s" 
+                 repeatCount="indefinite"/>
+    </text>
+    
+    <!-- Navigation Arrow -->
+    <polygon points="250,50 270,40 270,60" 
+             fill="#32cd32" 
+             stroke="#228b22" 
+             stroke-width="2">
+        <!-- Rotating navigation -->
+        <animateTransform 
+            attributeName="transform"
+            type="rotate"
+            values="0 260 50;90 260 50;180 260 50;270 260 50;360 260 50"
+            dur="8s"
+            repeatCount="indefinite"/>
+    </polygon>
+    
+    <!-- Distance Indicator -->
+    <g transform="translate(200, 80)">
+        <circle cx="0" cy="0" r="15" 
+                fill="rgba(50,205,50,0.8)" 
+                stroke="#228b22" 
+                stroke-width="2">
+            <animate attributeName="r" 
+                     values="15;18;15" 
+                     dur="2s" 
+                     repeatCount="indefinite"/>
+        </circle>
+        
+        <text x="0" y="-3" 
+              text-anchor="middle" 
+              font-family="Arial, sans-serif" 
+              font-size="8" 
+              font-weight="bold" 
+              fill="white">
+            2.5
+        </text>
+        <text x="0" y="6" 
+              text-anchor="middle" 
+              font-family="Arial, sans-serif" 
+              font-size="6" 
+              fill="white">
+            miles
+        </text>
+    </g>
+    
+    <!-- Property Info Bubble -->
+    <rect x="180" y="120" width="80" height="40" 
+          fill="white" 
+          stroke="#ddd" 
+          stroke-width="2" 
+          rx="8" 
+          opacity="0.9">
+        <!-- Info bubble animation -->
+        <animate attributeName="opacity" 
+                 values="0.9;1;0.9" 
+                 dur="3s" 
+                 repeatCount="indefinite"/>
+    </rect>
+    
+    <!-- Speech bubble pointer -->
+    <polygon points="180,140 170,145 180,150" 
+             fill="white" 
+             stroke="#ddd" 
+             stroke-width="2"/>
+    
+    <text x="220" y="135" 
+          text-anchor="middle" 
+          font-family="Arial, sans-serif" 
+          font-size="10" 
+          font-weight="bold" 
+          fill="#333">
+        $425,000
+    </text>
+    <text x="220" y="148" 
+          text-anchor="middle" 
+          font-family="Arial, sans-serif" 
+          font-size="8" 
+          fill="#666">
+        3BR / 2BA
+    </text>
+    
+    <!-- Floating dollar signs -->
+    <text x="80" y="100" 
+          font-family="Arial, sans-serif" 
+          font-size="16" 
+          font-weight="bold" 
+          fill="#228b22" 
+          opacity="0.7">
+        $
+        <animateTransform 
+            attributeName="transform"
+            type="translate"
+            values="0,0;0,-15;0,0"
+            dur="4s"
+            repeatCount="indefinite"/>
+        <animate attributeName="opacity" 
+                 values="0.7;0.3;0.7" 
+                 dur="4s" 
+                 repeatCount="indefinite"/>
+    </text>
+    
+    <!-- Title -->
+    <text x="150" y="280" 
+          text-anchor="middle" 
+          font-family="Arial, sans-serif" 
+          font-size="16" 
+          font-weight="bold" 
+          fill="#2c5530">
+        Prime Location
+        <animate attributeName="fill" 
+                 values="#2c5530;#228b22;#2c5530" 
+                 dur="5s" 
+                 repeatCount="indefinite"/>
+    </text>
+</svg>

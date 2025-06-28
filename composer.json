@@ -1,0 +1,18 @@
+{
+    "name": "advanced-svg-animator/wordpress-plugin",
+    "description": "Advanced SVG Animator WordPress Plugin with secure SVG sanitization",
+    "type": "wordpress-plugin",
+    "require": {
+        "php": ">=7.4",
+        "enshrined/svg-sanitize": "^0.15"
+    },
+    "autoload": {
+        "psr-4": {
+            "ASA\\": "includes/"
+        }
+    },
+    "config": {
+        "vendor-dir": "vendor"
+    },
+    "minimum-stability": "stable"
+}

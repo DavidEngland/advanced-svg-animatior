@@ -1,0 +1,135 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "advanced-svg-animator/svg-animator",
+	"version": "1.0.0",
+	"title": "SVG Animator",
+	"category": "media",
+	"icon": "format-image",
+	"description": "Insert and animate SVG files with predefined CSS animations and custom controls.",
+	"keywords": ["svg", "animation", "media", "graphics"],
+	"textdomain": "advanced-svg-animator",
+	"supports": {
+		"html": false,
+		"align": ["left", "center", "right", "wide", "full"],
+		"spacing": {
+			"margin": true,
+			"padding": true
+		},
+		"color": {
+			"background": true,
+			"text": false
+		}
+	},
+	"attributes": {
+		"svgId": {
+			"type": "number",
+			"default": 0
+		},
+		"svgUrl": {
+			"type": "string",
+			"default": ""
+		},
+		"svgContent": {
+			"type": "string",
+			"default": ""
+		},
+		"animationType": {
+			"type": "string",
+			"default": "none",
+			"enum": ["none", "fadeIn", "slideUp", "slideDown", "slideLeft", "slideRight", "scale", "rotate", "bounce", "drawLine", "drawSVGPaths", "morphPath"]
+		},
+		"duration": {
+			"type": "number",
+			"default": 1
+		},
+		"delay": {
+			"type": "number",
+			"default": 0
+		},
+		"iterationCount": {
+			"type": "string",
+			"default": "1"
+		},
+		"timingFunction": {
+			"type": "string",
+			"default": "ease",
+			"enum": ["ease", "linear", "ease-in", "ease-out", "ease-in-out", "cubic-bezier"]
+		},
+		"customCSSClass": {
+			"type": "string",
+			"default": ""
+		},
+		"targetSelector": {
+			"type": "string",
+			"default": "",
+			"description": "CSS selector to target specific SVG elements (e.g., #my-path, .my-group, path)"
+		},
+		"animationTrigger": {
+			"type": "string",
+			"default": "onLoad",
+			"enum": ["onLoad", "onScroll", "onHover", "onClick"]
+		},
+		"scrollOffset": {
+			"type": "number",
+			"default": 100,
+			"description": "Pixels from viewport edge to trigger scroll animation"
+		},
+		"scrollThreshold": {
+			"type": "number",
+			"default": 0.1,
+			"description": "Percentage of element visible to trigger animation (0.0 - 1.0)"
+		},
+		"hoverTarget": {
+			"type": "string",
+			"default": "svg",
+			"enum": ["svg", "block", "custom"],
+			"description": "What element triggers hover animation"
+		},
+		"drawSVGSettings": {
+			"type": "object",
+			"default": {
+				"strokeWidth": 2,
+				"strokeColor": "#333333",
+				"drawDirection": "forward",
+				"simultaneousPaths": false
+			}
+		},
+		"advancedSettings": {
+			"type": "object",
+			"default": {
+				"useGSAP": false,
+				"easingCustom": "",
+				"staggerDelay": 0,
+				"reverseOnComplete": false
+			}
+		},
+		"width": {
+			"type": "string",
+			"default": "300px"
+		},
+		"height": {
+			"type": "string",
+			"default": "auto"
+		},
+		"align": {
+			"type": "string",
+			"default": "center"
+		}
+	},
+	"providesContext": {
+		"advanced-svg-animator/svgId": "svgId",
+		"advanced-svg-animator/animationType": "animationType"
+	},
+	"example": {
+		"attributes": {
+			"animationType": "fadeIn",
+			"duration": 2,
+			"iterationCount": "infinite"
+		}
+	},
+	"editorScript": "file:./index.js",
+	"editorStyle": "file:./editor.css",
+	"style": "file:./style.css",
+	"viewScript": "file:./frontend.js"
+}

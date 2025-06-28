@@ -1,0 +1,198 @@
+/* Editor styles for SVG Animator block */
+
+.svg-animator-block {
+	margin: 20px 0;
+	max-width: 100%;
+	overflow: hidden;
+}
+
+.svg-animator-block.alignleft {
+	float: left;
+	margin-right: 20px;
+}
+
+.svg-animator-block.alignright {
+	float: right;
+	margin-left: 20px;
+}
+
+.svg-animator-block.aligncenter {
+	text-align: center;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.svg-animator-container {
+	display: inline-block;
+	max-width: 100%;
+	height: auto;
+	line-height: 0; /* Remove extra spacing */
+}
+
+.svg-animator-container svg {
+	max-width: 100%;
+	height: auto;
+	display: block;
+}
+
+.svg-animator-preview {
+	border: 2px dashed #ddd;
+	border-radius: 4px;
+	padding: 20px;
+	text-align: center;
+	background: #f9f9f9;
+	position: relative;
+}
+
+.animation-info {
+	margin-top: 10px;
+	padding: 8px;
+	background: rgba(0, 0, 0, 0.05);
+	border-radius: 3px;
+	font-size: 12px;
+	color: #666;
+	border: 1px solid #ddd;
+}
+
+/* Media upload placeholder styles */
+.svg-animator-block .components-placeholder {
+	min-height: 200px;
+	border: 2px dashed #ddd;
+	border-radius: 4px;
+}
+
+.svg-animator-block .components-placeholder__fieldset {
+	max-width: none;
+}
+
+/* Inspector controls styling */
+.svg-animator-block .components-panel__body {
+	margin-bottom: 0;
+}
+
+.svg-animator-block .components-base-control {
+	margin-bottom: 16px;
+}
+
+/* Loading state */
+.svg-animator-loading {
+	text-align: center;
+	padding: 40px 20px;
+	color: #666;
+}
+
+.svg-animator-loading .components-spinner {
+	margin-bottom: 10px;
+}
+
+/* Error state */
+.svg-animator-error {
+	padding: 20px;
+	background: #ffeaea;
+	border: 1px solid #d63638;
+	border-radius: 4px;
+	color: #d63638;
+}
+
+/* Animation preview styles in editor */
+.svg-animator-preview .asa-animation-fadeIn {
+	animation: asa-fadeIn var(--animation-duration, 1s) var(--animation-delay, 0s) var(--animation-iteration-count, 1) var(--animation-timing-function, ease);
+}
+
+.svg-animator-preview .asa-animation-slideUp {
+	animation: asa-slideUp var(--animation-duration, 1s) var(--animation-delay, 0s) var(--animation-iteration-count, 1) var(--animation-timing-function, ease);
+}
+
+.svg-animator-preview .asa-animation-slideDown {
+	animation: asa-slideDown var(--animation-duration, 1s) var(--animation-delay, 0s) var(--animation-iteration-count, 1) var(--animation-timing-function, ease);
+}
+
+.svg-animator-preview .asa-animation-slideLeft {
+	animation: asa-slideLeft var(--animation-duration, 1s) var(--animation-delay, 0s) var(--animation-iteration-count, 1) var(--animation-timing-function, ease);
+}
+
+.svg-animator-preview .asa-animation-slideRight {
+	animation: asa-slideRight var(--animation-duration, 1s) var(--animation-delay, 0s) var(--animation-iteration-count, 1) var(--animation-timing-function, ease);
+}
+
+.svg-animator-preview .asa-animation-scale {
+	animation: asa-scale var(--animation-duration, 1s) var(--animation-delay, 0s) var(--animation-iteration-count, 1) var(--animation-timing-function, ease);
+}
+
+.svg-animator-preview .asa-animation-rotate {
+	animation: asa-rotate var(--animation-duration, 1s) var(--animation-delay, 0s) var(--animation-iteration-count, 1) var(--animation-timing-function, ease);
+}
+
+.svg-animator-preview .asa-animation-bounce {
+	animation: asa-bounce var(--animation-duration, 1s) var(--animation-delay, 0s) var(--animation-iteration-count, 1) var(--animation-timing-function, ease);
+}
+
+.svg-animator-preview .asa-animation-drawLine path {
+	stroke-dasharray: 1000;
+	stroke-dashoffset: 1000;
+	animation: asa-drawLine var(--animation-duration, 1s) var(--animation-delay, 0s) var(--animation-iteration-count, 1) var(--animation-timing-function, ease);
+	animation-fill-mode: both;
+}
+
+/* Keyframes for editor preview */
+@keyframes asa-fadeIn {
+	from { opacity: 0; }
+	to { opacity: 1; }
+}
+
+@keyframes asa-slideUp {
+	from { transform: translateY(50px); opacity: 0; }
+	to { transform: translateY(0); opacity: 1; }
+}
+
+@keyframes asa-slideDown {
+	from { transform: translateY(-50px); opacity: 0; }
+	to { transform: translateY(0); opacity: 1; }
+}
+
+@keyframes asa-slideLeft {
+	from { transform: translateX(50px); opacity: 0; }
+	to { transform: translateX(0); opacity: 1; }
+}
+
+@keyframes asa-slideRight {
+	from { transform: translateX(-50px); opacity: 0; }
+	to { transform: translateX(0); opacity: 1; }
+}
+
+@keyframes asa-scale {
+	from { transform: scale(0); opacity: 0; }
+	to { transform: scale(1); opacity: 1; }
+}
+
+@keyframes asa-rotate {
+	from { transform: rotate(0deg); opacity: 0; }
+	to { transform: rotate(360deg); opacity: 1; }
+}
+
+@keyframes asa-bounce {
+	0%, 20%, 53%, 80%, 100% {
+		animation-timing-function: cubic-bezier(0.215, 0.610, 0.355, 1.000);
+		transform: translate3d(0,0,0);
+	}
+	40%, 43% {
+		animation-timing-function: cubic-bezier(0.755, 0.050, 0.855, 0.060);
+		transform: translate3d(0, -30px, 0);
+	}
+	70% {
+		animation-timing-function: cubic-bezier(0.755, 0.050, 0.855, 0.060);
+		transform: translate3d(0, -15px, 0);
+	}
+	90% {
+		transform: translate3d(0, -4px, 0);
+	}
+}
+
+@keyframes asa-drawLine {
+	from {
+		stroke-dashoffset: 1000;
+	}
+	to {
+		stroke-dashoffset: 0;
+	}
+}

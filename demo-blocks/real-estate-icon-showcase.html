@@ -1,0 +1,423 @@
+<!-- wp:group {"className":"real-estate-svg-showcase","style":{"spacing":{"padding":{"top":"var:preset|spacing|50","bottom":"var:preset|spacing|50","left":"var:preset|spacing|40","right":"var:preset|spacing|40"}}},"backgroundColor":"white","layout":{"type":"constrained","contentSize":"1000px"}} -->
+<div class="wp-block-group real-estate-svg-showcase has-white-background-color has-background" style="padding-top:var(--wp--preset--spacing--50);padding-right:var(--wp--preset--spacing--40);padding-bottom:var(--wp--preset--spacing--50);padding-left:var(--wp--preset--spacing--40)">
+
+<!-- wp:heading {"textAlign":"center","level":2,"style":{"typography":{"fontSize":"2.5rem","fontWeight":"700"}},"textColor":"dark-gray"} -->
+<h2 class="wp-block-heading has-text-align-center has-dark-gray-color has-text-color" style="font-size:2.5rem;font-weight:700">Animated Real Estate Icons</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph {"align":"center","style":{"typography":{"fontSize":"1.2rem","lineHeight":"1.6"}},"textColor":"medium-gray"} -->
+<p class="has-text-align-center has-medium-gray-color has-text-color" style="font-size:1.2rem;line-height:1.6">Professional animated SVG icons designed specifically for real estate websites</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:spacer {"height":"30px"} -->
+<div style="height:30px" aria-hidden="true" class="wp-block-spacer"></div>
+<!-- /wp:spacer -->
+
+<!-- wp:columns {"style":{"spacing":{"blockGap":{"top":"var:preset|spacing|40","left":"var:preset|spacing|40"}}}} -->
+<div class="wp-block-columns">
+
+<!-- wp:column {"width":"50%"} -->
+<div class="wp-block-column" style="flex-basis:50%">
+
+<!-- wp:group {"className":"icon-showcase-section","style":{"border":{"radius":"12px","width":"1px","color":"#e5e7eb"},"spacing":{"padding":{"top":"var:preset|spacing|40","bottom":"var:preset|spacing|40","left":"var:preset|spacing|30","right":"var:preset|spacing|30"}}},"backgroundColor":"gray-50","layout":{"type":"constrained"}} -->
+<div class="wp-block-group icon-showcase-section has-border-color has-gray-50-background-color has-background" style="border-color:#e5e7eb;border-width:1px;border-radius:12px;padding-top:var(--wp--preset--spacing--40);padding-right:var(--wp--preset--spacing--30);padding-bottom:var(--wp--preset--spacing--40);padding-left:var(--wp--preset--spacing--30)">
+
+<!-- wp:heading {"textAlign":"center","level":3,"style":{"typography":{"fontSize":"1.5rem","fontWeight":"600"}},"textColor":"dark-gray"} -->
+<h3 class="wp-block-heading has-text-align-center has-dark-gray-color has-text-color" style="font-size:1.5rem;font-weight:600">Color Icons</h3>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph {"align":"center","style":{"typography":{"fontSize":"0.9rem"}},"textColor":"medium-gray"} -->
+<p class="has-text-align-center has-medium-gray-color has-text-color" style="font-size:0.9rem">Vibrant, detailed icons with rich animations</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:html -->
+<div class="icon-grid">
+    <!-- Animated House -->
+    <div class="icon-item">
+        <div class="icon-container">
+            <svg width="80" height="80" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                    <linearGradient id="houseWall" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" style="stop-color:#87CEEB">
+                            <animate attributeName="stop-color" values="#87CEEB;#98D8E8;#87CEEB" dur="4s" repeatCount="indefinite"/>
+                        </stop>
+                        <stop offset="100%" style="stop-color:#4682B4">
+                            <animate attributeName="stop-color" values="#4682B4;#5A9BD4;#4682B4" dur="4s" repeatCount="indefinite"/>
+                        </stop>
+                    </linearGradient>
+                    <linearGradient id="roofGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" style="stop-color:#CD853F"/>
+                        <stop offset="100%" style="stop-color:#8B4513"/>
+                    </linearGradient>
+                </defs>
+                
+                <!-- House body -->
+                <rect x="25" y="45" width="50" height="40" fill="url(#houseWall)" rx="2">
+                    <animateTransform attributeName="transform" type="scale" values="1;1.03;1" dur="3s" repeatCount="indefinite"/>
+                </rect>
+                
+                <!-- Roof -->
+                <polygon points="20,45 50,20 80,45" fill="url(#roofGrad)">
+                    <animate attributeName="fill-opacity" values="1;0.8;1" dur="2s" repeatCount="indefinite"/>
+                </polygon>
+                
+                <!-- Door -->
+                <rect x="45" y="70" width="10" height="15" fill="#8B4513" rx="1">
+                    <animate attributeName="fill" values="#8B4513;#A0522D;#8B4513" dur="3s" repeatCount="indefinite"/>
+                </rect>
+                
+                <!-- Windows with light effects -->
+                <rect x="30" y="55" width="8" height="8" fill="#FFD700" rx="1">
+                    <animate attributeName="fill" values="#FFD700;#FFF8DC;#FFD700" dur="2s" begin="0s" repeatCount="indefinite"/>
+                </rect>
+                <rect x="62" y="55" width="8" height="8" fill="#FFD700" rx="1">
+                    <animate attributeName="fill" values="#FFD700;#FFF8DC;#FFD700" dur="2s" begin="1s" repeatCount="indefinite"/>
+                </rect>
+                
+                <!-- Chimney -->
+                <rect x="65" y="25" width="6" height="15" fill="#8B4513"/>
+                
+                <!-- Smoke -->
+                <circle cx="68" cy="20" r="2" fill="#D3D3D3" opacity="0.6">
+                    <animate attributeName="cy" values="20;10;5" dur="3s" repeatCount="indefinite"/>
+                    <animate attributeName="opacity" values="0.6;0.2;0" dur="3s" repeatCount="indefinite"/>
+                </circle>
+            </svg>
+        </div>
+        <p class="icon-label">Family Home</p>
+    </div>
+    
+    <!-- For Sale Sign -->
+    <div class="icon-item">
+        <div class="icon-container">
+            <svg width="80" height="80" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                    <linearGradient id="signBoard" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" style="stop-color:#FF6B6B"/>
+                        <stop offset="100%" style="stop-color:#FF8E53"/>
+                    </linearGradient>
+                </defs>
+                
+                <!-- Post -->
+                <rect x="47" y="35" width="6" height="55" fill="#8B4513">
+                    <animateTransform attributeName="transform" type="rotate" values="0 50 62.5;1.5 50 62.5;-1.5 50 62.5;0 50 62.5" dur="4s" repeatCount="indefinite"/>
+                </rect>
+                
+                <!-- Sign board -->
+                <rect x="25" y="15" width="50" height="25" fill="url(#signBoard)" rx="3">
+                    <animate attributeName="fill-opacity" values="1;0.9;1" dur="2s" repeatCount="indefinite"/>
+                </rect>
+                
+                <!-- Sign text -->
+                <text x="50" y="25" text-anchor="middle" font-family="Arial, sans-serif" font-size="7" font-weight="bold" fill="white">FOR</text>
+                <text x="50" y="34" text-anchor="middle" font-family="Arial, sans-serif" font-size="7" font-weight="bold" fill="white">SALE</text>
+                
+                <!-- Shadow -->
+                <ellipse cx="50" cy="88" rx="12" ry="3" fill="#000" opacity="0.2">
+                    <animate attributeName="opacity" values="0.2;0.1;0.2" dur="4s" repeatCount="indefinite"/>
+                </ellipse>
+            </svg>
+        </div>
+        <p class="icon-label">For Sale</p>
+    </div>
+    
+    <!-- Key -->
+    <div class="icon-item">
+        <div class="icon-container">
+            <svg width="80" height="80" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                    <radialGradient id="keyGradient" cx="50%" cy="50%" r="50%">
+                        <stop offset="0%" style="stop-color:#FFD700"/>
+                        <stop offset="50%" style="stop-color:#FFA500"/>
+                        <stop offset="100%" style="stop-color:#FF8C00"/>
+                    </radialGradient>
+                </defs>
+                
+                <!-- Key head -->
+                <circle cx="25" cy="50" r="15" fill="url(#keyGradient)">
+                    <animateTransform attributeName="transform" type="rotate" values="0 25 50;360 25 50" dur="6s" repeatCount="indefinite"/>
+                </circle>
+                
+                <!-- Inner circle -->
+                <circle cx="25" cy="50" r="8" fill="none" stroke="#DAA520" stroke-width="2"/>
+                
+                <!-- Key shaft -->
+                <rect x="35" y="47" width="40" height="6" fill="url(#keyGradient)" rx="3"/>
+                
+                <!-- Key teeth -->
+                <rect x="70" y="53" width="5" height="8" fill="url(#keyGradient)"/>
+                <rect x="65" y="53" width="3" height="5" fill="url(#keyGradient)"/>
+                
+                <!-- Sparkle effects -->
+                <circle cx="60" cy="40" r="1.5" fill="#FFF">
+                    <animate attributeName="opacity" values="0;1;0" dur="2s" begin="0s" repeatCount="indefinite"/>
+                </circle>
+                <circle cx="35" cy="35" r="1" fill="#FFF">
+                    <animate attributeName="opacity" values="0;1;0" dur="2s" begin="1s" repeatCount="indefinite"/>
+                </circle>
+            </svg>
+        </div>
+        <p class="icon-label">Property Access</p>
+    </div>
+</div>
+<!-- /wp:html -->
+
+</div>
+<!-- /wp:group -->
+
+</div>
+<!-- /wp:column -->
+
+<!-- wp:column {"width":"50%"} -->
+<div class="wp-block-column" style="flex-basis:50%">
+
+<!-- wp:group {"className":"icon-showcase-section","style":{"border":{"radius":"12px","width":"1px","color":"#e5e7eb"},"spacing":{"padding":{"top":"var:preset|spacing|40","bottom":"var:preset|spacing|40","left":"var:preset|spacing|30","right":"var:preset|spacing|30"}}},"backgroundColor":"gray-50","layout":{"type":"constrained"}} -->
+<div class="wp-block-group icon-showcase-section has-border-color has-gray-50-background-color has-background" style="border-color:#e5e7eb;border-width:1px;border-radius:12px;padding-top:var(--wp--preset--spacing--40);padding-right:var(--wp--preset--spacing--30);padding-bottom:var(--wp--preset--spacing--40);padding-left:var(--wp--preset--spacing--30)">
+
+<!-- wp:heading {"textAlign":"center","level":3,"style":{"typography":{"fontSize":"1.5rem","fontWeight":"600"}},"textColor":"dark-gray"} -->
+<h3 class="wp-block-heading has-text-align-center has-dark-gray-color has-text-color" style="font-size:1.5rem;font-weight:600">Line Icons</h3>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph {"align":"center","style":{"typography":{"fontSize":"0.9rem"}},"textColor":"medium-gray"} -->
+<p class="has-text-align-center has-medium-gray-color has-text-color" style="font-size:0.9rem">Minimalist line art with subtle animations</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:html -->
+<div class="icon-grid">
+    <!-- Line House -->
+    <div class="icon-item">
+        <div class="icon-container line-style">
+            <svg width="80" height="80" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                <!-- House body -->
+                <rect x="25" y="45" width="50" height="40" fill="none" stroke="currentColor" stroke-width="2.5" rx="2">
+                    <animateTransform attributeName="transform" type="scale" values="1;1.02;1" dur="3s" repeatCount="indefinite"/>
+                </rect>
+                
+                <!-- Roof -->
+                <polygon points="20,45 50,20 80,45" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linejoin="round">
+                    <animate attributeName="stroke-opacity" values="1;0.6;1" dur="2.5s" repeatCount="indefinite"/>
+                </polygon>
+                
+                <!-- Door -->
+                <rect x="45" y="70" width="10" height="15" fill="none" stroke="currentColor" stroke-width="2"/>
+                
+                <!-- Windows -->
+                <rect x="30" y="55" width="8" height="8" fill="none" stroke="currentColor" stroke-width="2">
+                    <animate attributeName="stroke-width" values="2;3;2" dur="3s" begin="0s" repeatCount="indefinite"/>
+                </rect>
+                <rect x="62" y="55" width="8" height="8" fill="none" stroke="currentColor" stroke-width="2">
+                    <animate attributeName="stroke-width" values="2;3;2" dur="3s" begin="1.5s" repeatCount="indefinite"/>
+                </rect>
+                
+                <!-- Breathing effect -->
+                <animate attributeName="opacity" values="1;0.8;1" dur="4s" repeatCount="indefinite"/>
+            </svg>
+        </div>
+        <p class="icon-label">Home Outline</p>
+    </div>
+    
+    <!-- Line Location Pin -->
+    <div class="icon-item">
+        <div class="icon-container line-style">
+            <svg width="80" height="80" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                <!-- Pin shape -->
+                <path d="M50 15 C60 15 68 23 68 33 C68 43 50 75 50 75 C50 75 32 43 32 33 C32 23 40 15 50 15 Z" 
+                      fill="none" stroke="currentColor" stroke-width="2.5" stroke-linejoin="round">
+                    <animateTransform attributeName="transform" type="scale" values="1;1.08;1" dur="2.5s" repeatCount="indefinite"/>
+                </path>
+                
+                <!-- Inner dot -->
+                <circle cx="50" cy="33" r="8" fill="none" stroke="currentColor" stroke-width="2">
+                    <animate attributeName="r" values="8;10;8" dur="2.5s" repeatCount="indefinite"/>
+                </circle>
+                
+                <!-- Ripple effects -->
+                <circle cx="50" cy="33" r="20" fill="none" stroke="currentColor" stroke-width="1" stroke-opacity="0">
+                    <animate attributeName="r" values="15;35" dur="3s" repeatCount="indefinite"/>
+                    <animate attributeName="stroke-opacity" values="0.5;0" dur="3s" repeatCount="indefinite"/>
+                </circle>
+                
+                <circle cx="50" cy="33" r="25" fill="none" stroke="currentColor" stroke-width="1" stroke-opacity="0">
+                    <animate attributeName="r" values="15;35" dur="3s" begin="1s" repeatCount="indefinite"/>
+                    <animate attributeName="stroke-opacity" values="0.3;0" dur="3s" begin="1s" repeatCount="indefinite"/>
+                </circle>
+            </svg>
+        </div>
+        <p class="icon-label">Location Pin</p>
+    </div>
+    
+    <!-- Line Key -->
+    <div class="icon-item">
+        <div class="icon-container line-style">
+            <svg width="80" height="80" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                <!-- Key head -->
+                <circle cx="25" cy="50" r="12" fill="none" stroke="currentColor" stroke-width="2.5">
+                    <animateTransform attributeName="transform" type="rotate" values="0 25 50;360 25 50" dur="8s" repeatCount="indefinite"/>
+                </circle>
+                
+                <!-- Inner pattern -->
+                <circle cx="25" cy="50" r="6" fill="none" stroke="currentColor" stroke-width="1.5">
+                    <animate attributeName="stroke-opacity" values="1;0.4;1" dur="3s" repeatCount="indefinite"/>
+                </circle>
+                
+                <!-- Key shaft -->
+                <rect x="35" y="47" width="35" height="6" fill="none" stroke="currentColor" stroke-width="2.5" rx="3"/>
+                
+                <!-- Key teeth -->
+                <rect x="65" y="53" width="5" height="6" fill="none" stroke="currentColor" stroke-width="2"/>
+                <rect x="60" y="53" width="3" height="4" fill="none" stroke="currentColor" stroke-width="2"/>
+                
+                <!-- Floating effect -->
+                <animateTransform attributeName="transform" type="translate" values="0 0;0 -2;0 0" dur="3s" repeatCount="indefinite"/>
+            </svg>
+        </div>
+        <p class="icon-label">Access Key</p>
+    </div>
+</div>
+<!-- /wp:html -->
+
+</div>
+<!-- /wp:group -->
+
+</div>
+<!-- /wp:column -->
+
+</div>
+<!-- /wp:columns -->
+
+<!-- wp:spacer {"height":"40px"} -->
+<div style="height:40px" aria-hidden="true" class="wp-block-spacer"></div>
+<!-- /wp:spacer -->
+
+<!-- wp:group {"className":"features-highlight","style":{"border":{"radius":"12px","width":"1px","color":"#e5e7eb"},"spacing":{"padding":{"top":"var:preset|spacing|40","bottom":"var:preset|spacing|40","left":"var:preset|spacing|40","right":"var:preset|spacing|40"}}},"backgroundColor":"gray-50","layout":{"type":"constrained"}} -->
+<div class="wp-block-group features-highlight has-border-color has-gray-50-background-color has-background" style="border-color:#e5e7eb;border-width:1px;border-radius:12px;padding-top:var(--wp--preset--spacing--40);padding-right:var(--wp--preset--spacing--40);padding-bottom:var(--wp--preset--spacing--40);padding-left:var(--wp--preset--spacing--40)">
+
+<!-- wp:heading {"textAlign":"center","level":3,"style":{"typography":{"fontSize":"1.8rem","fontWeight":"600"}},"textColor":"dark-gray"} -->
+<h3 class="wp-block-heading has-text-align-center has-dark-gray-color has-text-color" style="font-size:1.8rem;font-weight:600">Perfect for Real Estate</h3>
+<!-- /wp:heading -->
+
+<!-- wp:columns {"style":{"spacing":{"blockGap":{"top":"var:preset|spacing|30","left":"var:preset|spacing|30"}}}} -->
+<div class="wp-block-columns">
+
+<!-- wp:column -->
+<div class="wp-block-column">
+
+<!-- wp:list {"style":{"typography":{"fontSize":"1rem","lineHeight":"1.7"}},"textColor":"medium-gray"} -->
+<ul class="has-medium-gray-color has-text-color" style="font-size:1rem;line-height:1.7">
+<li><strong>Property Listings:</strong> Visual indicators for property types</li>
+<li><strong>Navigation Menus:</strong> Clean icons for site sections</li>
+<li><strong>Call-to-Action:</strong> Animated buttons and highlights</li>
+<li><strong>Service Pages:</strong> Professional service indicators</li>
+</ul>
+<!-- /wp:list -->
+
+</div>
+<!-- /wp:column -->
+
+<!-- wp:column -->
+<div class="wp-block-column">
+
+<!-- wp:list {"style":{"typography":{"fontSize":"1rem","lineHeight":"1.7"}},"textColor":"medium-gray"} -->
+<ul class="has-medium-gray-color has-text-color" style="font-size:1rem;line-height:1.7">
+<li><strong>SEO Optimized:</strong> Vector graphics for fast loading</li>
+<li><strong>Mobile Ready:</strong> Scalable on all devices</li>
+<li><strong>Theme Integration:</strong> Adapts to your brand colors</li>
+<li><strong>Easy Implementation:</strong> Simple copy-paste integration</li>
+</ul>
+<!-- /wp:list -->
+
+</div>
+<!-- /wp:column -->
+
+</div>
+<!-- /wp:columns -->
+
+</div>
+<!-- /wp:group -->
+
+</div>
+<!-- /wp:group -->
+
+<style>
+.real-estate-svg-showcase {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+.icon-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 1.5rem;
+    margin: 20px 0;
+}
+
+.icon-item {
+    text-align: center;
+}
+
+.icon-container {
+    background: white;
+    border-radius: 12px;
+    padding: 15px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+.icon-container:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+}
+
+.icon-container.line-style {
+    color: #4a5568;
+}
+
+.icon-container.line-style:hover {
+    color: #2d3748;
+}
+
+.icon-label {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #4a5568;
+    margin: 0;
+    padding: 0;
+}
+
+.icon-showcase-section {
+    transition: transform 0.3s ease;
+}
+
+.icon-showcase-section:hover {
+    transform: translateY(-3px);
+}
+
+@media (max-width: 768px) {
+    .icon-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1rem;
+    }
+    
+    .icon-container {
+        padding: 10px;
+    }
+}
+
+/* Accessibility: Respect user motion preferences */
+@media (prefers-reduced-motion: reduce) {
+    .icon-container svg * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+    
+    .icon-container {
+        transition: none !important;
+    }
+    
+    .icon-showcase-section {
+        transition: none !important;
+    }
+}
+</style>

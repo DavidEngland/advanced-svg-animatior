@@ -1,0 +1,21 @@
+{
+  "name": "advanced-svg-animator",
+  "version": "1.0.0",
+  "description": "Advanced SVG Animator WordPress Plugin",
+  "scripts": {
+    "build": "wp-scripts build blocks/svg-animator/index.js --output-path=blocks/svg-animator/build/",
+    "start": "wp-scripts start blocks/svg-animator/index.js --output-path=blocks/svg-animator/build/",
+    "dev": "wp-scripts start blocks/svg-animator/index.js --output-path=blocks/svg-animator/build/ --watch"
+  },
+  "devDependencies": {
+    "@wordpress/scripts": "^26.19.0"
+  },
+  "dependencies": {
+    "@wordpress/block-editor": "^12.20.0",
+    "@wordpress/blocks": "^12.29.0",
+    "@wordpress/components": "^27.0.0",
+    "@wordpress/element": "^5.29.0",
+    "@wordpress/i18n": "^4.52.0",
+    "@wordpress/api-fetch": "^6.49.0"
+  }
+}

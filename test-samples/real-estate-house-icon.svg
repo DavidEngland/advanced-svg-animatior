@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" 
+     viewBox="0 0 300 300" 
+     width="300" 
+     height="300">
+    
+    <!-- Background -->
+    <rect width="300" height="300" fill="#f0f8ff"/>
+    
+    <!-- House Base -->
+    <rect x="100" y="150" width="100" height="80" 
+          fill="#e6e6fa" 
+          stroke="#4a4a4a" 
+          stroke-width="2">
+        <!-- Subtle scale animation for the house -->
+        <animateTransform 
+            attributeName="transform"
+            type="scale"
+            values="1;1.02;1"
+            dur="3s"
+            repeatCount="indefinite"/>
+    </rect>
+    
+    <!-- Roof -->
+    <polygon points="90,150 150,100 210,150" 
+             fill="#8b4513" 
+             stroke="#654321" 
+             stroke-width="2">
+        <!-- Gentle bounce animation -->
+        <animateTransform 
+            attributeName="transform"
+            type="translate"
+            values="0,0;0,-2;0,0"
+            dur="2s"
+            repeatCount="indefinite"/>
+    </polygon>
+    
+    <!-- Door -->
+    <rect x="125" y="180" width="20" height="50" 
+          fill="#654321" 
+          stroke="#4a4a4a" 
+          stroke-width="1">
+        <!-- Door opening animation -->
+        <animateTransform 
+            attributeName="transform"
+            type="skewX"
+            values="0;-5;0"
+            dur="4s"
+            repeatCount="indefinite"/>
+    </rect>
+    
+    <!-- Door knob -->
+    <circle cx="140" cy="205" r="2" fill="#ffd700">
+        <!-- Gentle glow animation -->
+        <animate attributeName="r" 
+                 values="2;3;2" 
+                 dur="2s" 
+                 repeatCount="indefinite"/>
+    </circle>
+    
+    <!-- Windows -->
+    <rect x="110" y="165" width="15" height="15" 
+          fill="#87ceeb" 
+          stroke="#4a4a4a" 
+          stroke-width="1">
+        <!-- Window light flicker -->
+        <animate attributeName="fill" 
+                 values="#87ceeb;#ffffe0;#87ceeb" 
+                 dur="5s" 
+                 repeatCount="indefinite"/>
+    </rect>
+    
+    <rect x="175" y="165" width="15" height="15" 
+          fill="#87ceeb" 
+          stroke="#4a4a4a" 
+          stroke-width="1">
+        <!-- Delayed window animation -->
+        <animate attributeName="fill" 
+                 values="#87ceeb;#ffffe0;#87ceeb" 
+                 dur="5s" 
+                 begin="1s"
+                 repeatCount="indefinite"/>
+    </rect>
+    
+    <!-- Window crosses -->
+    <line x1="117.5" y1="165" x2="117.5" y2="180" stroke="#4a4a4a" stroke-width="1"/>
+    <line x1="110" y1="172.5" x2="125" y2="172.5" stroke="#4a4a4a" stroke-width="1"/>
+    <line x1="182.5" y1="165" x2="182.5" y2="180" stroke="#4a4a4a" stroke-width="1"/>
+    <line x1="175" y1="172.5" x2="190" y2="172.5" stroke="#4a4a4a" stroke-width="1"/>
+    
+    <!-- Chimney -->
+    <rect x="170" y="120" width="12" height="25" 
+          fill="#8b4513" 
+          stroke="#654321" 
+          stroke-width="1"/>
+    
+    <!-- Smoke -->
+    <g>
+        <circle cx="178" r="3" fill="#d3d3d3" opacity="0.7">
+            <animate attributeName="cy" 
+                     values="115;80;115" 
+                     dur="3s" 
+                     repeatCount="indefinite"/>
+            <animate attributeName="opacity" 
+                     values="0.7;0.2;0.7" 
+                     dur="3s" 
+                     repeatCount="indefinite"/>
+        </circle>
+        <circle cx="182" r="2" fill="#d3d3d3" opacity="0.5">
+            <animate attributeName="cy" 
+                     values="110;75;110" 
+                     dur="3.5s" 
+                     repeatCount="indefinite"/>
+            <animate attributeName="opacity" 
+                     values="0.5;0.1;0.5" 
+                     dur="3.5s" 
+                     repeatCount="indefinite"/>
+        </circle>
+        <circle cx="175" r="2.5" fill="#d3d3d3" opacity="0.6">
+            <animate attributeName="cy" 
+                     values="108;70;108" 
+                     dur="4s" 
+                     repeatCount="indefinite"/>
+            <animate attributeName="opacity" 
+                     values="0.6;0.1;0.6" 
+                     dur="4s" 
+                     repeatCount="indefinite"/>
+        </circle>
+    </g>
+    
+    <!-- Ground/Grass -->
+    <rect x="0" y="230" width="300" height="70" fill="#90ee90"/>
+    
+    <!-- Simple flowers -->
+    <g>
+        <circle cx="70" cy="240" r="3" fill="#ff69b4">
+            <animate attributeName="r" 
+                     values="3;4;3" 
+                     dur="2s" 
+                     repeatCount="indefinite"/>
+        </circle>
+        <circle cx="230" cy="245" r="2.5" fill="#ffb6c1">
+            <animate attributeName="r" 
+                     values="2.5;3.5;2.5" 
+                     dur="2.5s" 
+                     repeatCount="indefinite"/>
+        </circle>
+    </g>
+    
+    <!-- Sun -->
+    <circle cx="250" cy="50" r="20" fill="#ffd700" opacity="0.8">
+        <!-- Sun rays rotation -->
+        <animateTransform 
+            attributeName="transform"
+            type="rotate"
+            values="0 250 50;360 250 50"
+            dur="10s"
+            repeatCount="indefinite"/>
+    </circle>
+    
+    <!-- Sun rays -->
+    <g stroke="#ffd700" stroke-width="2" opacity="0.6">
+        <line x1="250" y1="20" x2="250" y2="25"/>
+        <line x1="250" y1="75" x2="250" y2="80"/>
+        <line x1="220" y1="50" x2="225" y2="50"/>
+        <line x1="275" y1="50" x2="280" y2="50"/>
+        <line x1="230" y1="30" x2="233" y2="33"/>
+        <line x1="267" y1="67" x2="270" y2="70"/>
+        <line x1="270" y1="30" x2="267" y2="33"/>
+        <line x1="233" y1="67" x2="230" y2="70"/>
+        
+        <!-- Rays animation -->
+        <animateTransform 
+            attributeName="transform"
+            type="rotate"
+            values="0 250 50;360 250 50"
+            dur="10s"
+            repeatCount="indefinite"/>
+    </g>
+    
+    <!-- Title -->
+    <text x="150" y="280" 
+          text-anchor="middle" 
+          font-family="Arial, sans-serif" 
+          font-size="16" 
+          font-weight="bold" 
+          fill="#2c5530">
+        Dream Home
+        <animate attributeName="opacity" 
+                 values="1;0.7;1" 
+                 dur="3s" 
+                 repeatCount="indefinite"/>
+    </text>
+</svg>
