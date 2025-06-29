@@ -116,6 +116,16 @@ private function load_admin_dependencies() {
 
 #### Known Plugin Conflicts
 
+**Admin Permission Issues (UPDATED FIX)**
+- **Issue**: "Sorry, you are not allowed to access this page" even for Administrator users
+- **Cause**: WordPress capability system conflicts or role assignment issues
+- **Solution**: 
+  1. Update to latest plugin version (includes enhanced capability checking)
+  2. Check WordPress debug.log for detailed error information
+  3. Ensure your user account has 'Administrator' role in WordPress
+  4. If issue persists, the plugin now has fallback menu creation
+- **Debug**: Plugin now logs detailed capability information to help diagnose issues
+
 **Permissions Error: "Sorry, you are not allowed to access this page"**
 - **Issue**: Users without administrator privileges can't access plugin settings
 - **Solution**: 

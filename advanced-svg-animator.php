@@ -94,6 +94,7 @@ class ASA_Plugin {
     private function init_hooks() {
         // Core plugin hooks
         add_action('init', array($this, 'init_plugin'));
+        add_action('plugins_loaded', array($this, 'early_init'), 5); // Load admin classes early
         add_action('admin_init', array($this, 'admin_init'));
         add_action('wp_enqueue_scripts', array($this, 'enqueue_frontend_scripts'));
         add_action('admin_enqueue_scripts', array($this, 'enqueue_admin_scripts'));
@@ -191,8 +192,11 @@ class ASA_Plugin {
      * Initialize the plugin
      */
     public function init_plugin() {
-        // Load dependencies now that WordPress is ready
-        $this->load_dependencies();
+        // Load remaining dependencies (frontend only, admin already loaded in early_init)
+        if (!is_admin()) {
+            $this->load_svg_sanitizer();
+            $this->load_frontend_dependencies();
+        }
         
         // Load text domain for translations
         load_plugin_textdomain(
@@ -203,6 +207,28 @@ class ASA_Plugin {
 
         // Initialize plugin components
         $this->init_components();
+    }
+
+    /**
+     * Early initialization - load admin classes before admin_menu hook
+     */
+    public function early_init() {
+        if (ASA_DEBUG) {
+            error_log('ASA Debug: early_init() called - loading admin dependencies');
+        }
+        
+        // Load SVG sanitization library first
+        $this->load_svg_sanitizer();
+        
+        // Load admin dependencies early if in admin area
+        if (is_admin()) {
+            $this->load_admin_dependencies();
+            
+            if (ASA_DEBUG) {
+                error_log('ASA Debug: Admin dependencies loaded in early_init()');
+                error_log('ASA Debug: Admin settings instance: ' . (is_object($this->admin_settings) ? 'Created' : 'Failed'));
+            }
+        }
     }
 
     /**

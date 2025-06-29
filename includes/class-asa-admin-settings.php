@@ -45,45 +45,48 @@ class ASA_Admin_Settings {
      * Add settings page to WordPress admin menu
      */
     public function add_settings_page() {
-        // Debug: Check current user capabilities
+        // Enhanced debug logging
         if (ASA_DEBUG) {
+            error_log('ASA Debug: add_settings_page() called at ' . current_time('mysql'));
             error_log('ASA Debug: Current user can manage_options: ' . (current_user_can('manage_options') ? 'YES' : 'NO'));
             error_log('ASA Debug: Current user ID: ' . get_current_user_id());
             error_log('ASA Debug: Current user roles: ' . implode(', ', wp_get_current_user()->roles ?? []));
+            error_log('ASA Debug: is_admin(): ' . (is_admin() ? 'YES' : 'NO'));
+            error_log('ASA Debug: current_action: ' . current_action());
         }
         
-        // Use more flexible capability check for better compatibility
-        $capability = 'manage_options';
-        
+        // Always try to add the menu, regardless of current user (WordPress will handle permissions)
         $page_hook = add_options_page(
             __('Advanced SVG Animator Settings', ASA_TEXT_DOMAIN),
             __('SVG Animator', ASA_TEXT_DOMAIN),
-            $capability,
+            'manage_options', // Standard WordPress capability
             self::PAGE_SLUG,
             array($this, 'render_settings_page')
         );
         
         // Debug: Check if page was added successfully
         if (ASA_DEBUG) {
-            error_log('ASA Debug: Settings page hook: ' . ($page_hook ? $page_hook : 'FAILED'));
+            error_log('ASA Debug: Primary settings page hook: ' . ($page_hook ? $page_hook : 'FAILED'));
         }
         
-        // If standard method failed, try alternative method
-        if (!$page_hook && $this->current_user_can_manage_plugin()) {
-            // Add as a top-level menu as fallback
-            $page_hook = add_menu_page(
-                __('SVG Animator Settings', ASA_TEXT_DOMAIN),
-                __('SVG Animator', ASA_TEXT_DOMAIN),
-                'read', // Lower capability requirement
-                self::PAGE_SLUG,
-                array($this, 'render_settings_page'),
-                'dashicons-art',
-                30
-            );
+        // Always add fallback top-level menu with lower capability
+        $fallback_hook = add_menu_page(
+            __('SVG Animator Settings', ASA_TEXT_DOMAIN),
+            __('SVG Animator', ASA_TEXT_DOMAIN),
+            'read', // Much lower capability requirement
+            self::PAGE_SLUG . '-fallback',
+            array($this, 'render_settings_page'),
+            'dashicons-art',
+            30
+        );
+        
+        if (ASA_DEBUG) {
+            error_log('ASA Debug: Fallback menu page hook: ' . ($fallback_hook ? $fallback_hook : 'ALSO FAILED'));
             
-            if (ASA_DEBUG) {
-                error_log('ASA Debug: Fallback menu page hook: ' . ($page_hook ? $page_hook : 'ALSO FAILED'));
-            }
+            // Also log global menu state
+            global $menu, $submenu;
+            error_log('ASA Debug: Total menu items: ' . (is_array($menu) ? count($menu) : 'not array'));
+            error_log('ASA Debug: Settings submenu items: ' . (isset($submenu['options-general.php']) ? count($submenu['options-general.php']) : 'none'));
         }
     }
 
