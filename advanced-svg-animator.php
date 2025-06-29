@@ -251,27 +251,36 @@ class ASA_Plugin {
      * Check for SVG plugin conflicts and show admin notices
      */
     private function check_svg_plugin_conflicts() {
-        $conflicting_plugins = array(
-            'safe-svg/safe-svg.php' => 'Safe SVG',
-            'svg-support/svg-support.php' => 'SVG Support', 
-            'enable-svg-uploads/enable-svg-uploads.php' => 'Enable SVG Uploads',
-            'wp-svg-icons/wp-svg-icons.php' => 'WP SVG Icons',
-            'svg-upload-and-sanitizer/svg-upload-and-sanitizer.php' => 'SVG Upload and Sanitizer'
-        );
-
-        $active_conflicts = array();
-        foreach ($conflicting_plugins as $plugin_file => $plugin_name) {
-            if (is_plugin_active($plugin_file)) {
-                $active_conflicts[] = $plugin_name;
-            }
-        }
+        // Get stored conflicts from should_enable_svg_support() check
+        $active_conflicts = get_option('asa_detected_svg_conflicts', array());
+        
+        // Check if SVG is already supported
+        $existing_mimes = get_allowed_mime_types();
+        $svg_already_supported = isset($existing_mimes['svg']) || in_array('image/svg+xml', $existing_mimes);
 
         if (!empty($active_conflicts)) {
             add_action('admin_notices', function() use ($active_conflicts) {
                 echo '<div class="notice notice-warning is-dismissible">';
-                echo '<p><strong>Advanced SVG Animator:</strong> Detected active SVG plugins: ' . implode(', ', $active_conflicts) . '</p>';
-                echo '<p>SVG upload support has been automatically disabled to prevent conflicts. The animation and security features will still work.</p>';
-                echo '<p><a href="' . admin_url('tools.php?page=asa-svg-scanner') . '">Manage SVG Settings</a></p>';
+                echo '<p><strong>' . esc_html__('Advanced SVG Animator - Plugin Conflicts Detected', ASA_TEXT_DOMAIN) . '</strong></p>';
+                echo '<p>' . sprintf(
+                    esc_html__('Detected active SVG plugins: %s', ASA_TEXT_DOMAIN),
+                    implode(', ', array_map('esc_html', $active_conflicts))
+                ) . '</p>';
+                echo '<p>' . esc_html__('SVG upload support has been automatically disabled to prevent conflicts. Animation and security features will still work.', ASA_TEXT_DOMAIN) . '</p>';
+                echo '<p>';
+                echo '<a href="' . esc_url(admin_url('options-general.php?page=asa-settings')) . '" class="button button-secondary">' . esc_html__('Manage Settings', ASA_TEXT_DOMAIN) . '</a> ';
+                echo '<a href="' . esc_url(admin_url('tools.php?page=asa-svg-scanner')) . '" class="button button-secondary">' . esc_html__('SVG Scanner', ASA_TEXT_DOMAIN) . '</a>';
+                echo '</p>';
+                echo '</div>';
+            });
+        } elseif ($svg_already_supported) {
+            add_action('admin_notices', function() {
+                echo '<div class="notice notice-info is-dismissible">';
+                echo '<p><strong>' . esc_html__('Advanced SVG Animator - SVG Support Detected', ASA_TEXT_DOMAIN) . '</strong></p>';
+                echo '<p>' . esc_html__('SVG uploads are already enabled by your theme or another plugin. ASA\'s animation and security features are active.', ASA_TEXT_DOMAIN) . '</p>';
+                echo '<p>';
+                echo '<a href="' . esc_url(admin_url('options-general.php?page=asa-settings')) . '" class="button button-secondary">' . esc_html__('Configure Settings', ASA_TEXT_DOMAIN) . '</a>';
+                echo '</p>';
                 echo '</div>';
             });
         }
@@ -1240,34 +1249,69 @@ class ASA_Plugin {
      * Check if plugin should enable SVG support (to avoid conflicts)
      */
     private function should_enable_svg_support() {
-        // Check if disabled via setting to avoid conflicts
-        if (!get_option('asa_enable_svg_support', true)) {
+        // Check if disabled via setting
+        $options = get_option('asa_plugin_options', array());
+        if (isset($options['enable_svg_support']) && !$options['enable_svg_support']) {
+            asa_log('ASA SVG support manually disabled in settings', 'info');
+            return false;
+        }
+
+        // Check if SVG MIME type is already supported by WordPress
+        $existing_mimes = get_allowed_mime_types();
+        if (isset($existing_mimes['svg']) || in_array('image/svg+xml', $existing_mimes)) {
+            asa_log('SVG MIME type already enabled by WordPress, theme, or another plugin', 'info');
+            // SVG is already supported - check if we should override or coexist
+            if (isset($options['force_svg_support']) && $options['force_svg_support']) {
+                asa_log('Force SVG support enabled - will add ASA hooks anyway', 'info');
+                return true;
+            }
             return false;
         }
 
         // Check if another popular SVG plugin is active
         $conflicting_plugins = array(
-            'safe-svg/safe-svg.php',
-            'svg-support/svg-support.php', 
-            'enable-svg-uploads/enable-svg-uploads.php',
-            'wp-svg-icons/wp-svg-icons.php',
-            'svg-upload-and-sanitizer/svg-upload-and-sanitizer.php'
+            'safe-svg/safe-svg.php' => 'Safe SVG',
+            'svg-support/svg-support.php' => 'SVG Support', 
+            'enable-svg-uploads/enable-svg-uploads.php' => 'Enable SVG Uploads',
+            'wp-svg-icons/wp-svg-icons.php' => 'WP SVG Icons',
+            'svg-upload-and-sanitizer/svg-upload-and-sanitizer.php' => 'SVG Upload and Sanitizer',
+            'easy-svg/easy-svg.php' => 'Easy SVG',
+            'wp-svg-upload/wp-svg-upload.php' => 'WP SVG Upload',
+            'simple-svg-upload/simple-svg-upload.php' => 'Simple SVG Upload'
         );
 
-        foreach ($conflicting_plugins as $plugin) {
+        $active_conflicts = array();
+        foreach ($conflicting_plugins as $plugin => $name) {
             if (is_plugin_active($plugin)) {
-                // Another SVG plugin is active, don't enable our SVG support
-                asa_log("SVG plugin conflict detected: {$plugin}. Disabling ASA SVG support.", 'warning');
-                return false;
+                $active_conflicts[] = $name;
+                asa_log("SVG plugin conflict detected: {$name} ({$plugin})", 'warning');
             }
         }
 
-        // Check if theme has SVG support
-        if (current_theme_supports('svg')) {
-            asa_log('Theme has SVG support. Checking for conflicts.', 'info');
-            // Theme supports SVG, but we can still add our enhancements
+        if (!empty($active_conflicts)) {
+            // Store conflicting plugins for admin notice
+            update_option('asa_detected_svg_conflicts', $active_conflicts);
+            return false;
+        } else {
+            // Clear any previous conflicts
+            delete_option('asa_detected_svg_conflicts');
         }
 
+        // Check if theme has SVG support through upload_mimes filter
+        $theme_mimes = apply_filters('upload_mimes', array());
+        if (isset($theme_mimes['svg']) || in_array('image/svg+xml', $theme_mimes)) {
+            asa_log('Theme or plugin has added SVG support via upload_mimes filter', 'info');
+            return false;
+        }
+
+        // Check if theme declares SVG support
+        if (current_theme_supports('svg')) {
+            asa_log('Theme declares SVG support', 'info');
+            return false;
+        }
+
+        // All checks passed - safe to enable SVG support
+        asa_log('No SVG conflicts detected - enabling ASA SVG support', 'info');
         return true;
     }
 

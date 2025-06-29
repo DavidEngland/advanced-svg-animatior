@@ -74,6 +74,13 @@ class ASA_Admin_Settings {
         );
 
         add_settings_section(
+            'asa_svg_support_section',
+            __('SVG Support Settings', ASA_TEXT_DOMAIN),
+            array($this, 'svg_support_section_callback'),
+            self::PAGE_SLUG
+        );
+
+        add_settings_section(
             'asa_security_section',
             __('Security Settings', ASA_TEXT_DOMAIN),
             array($this, 'security_section_callback'),
@@ -87,6 +94,22 @@ class ASA_Admin_Settings {
             array($this, 'allowed_roles_callback'),
             self::PAGE_SLUG,
             'asa_svg_upload_section'
+        );
+
+        add_settings_field(
+            'enable_svg_support',
+            __('Enable SVG Upload Support', ASA_TEXT_DOMAIN),
+            array($this, 'enable_svg_support_callback'),
+            self::PAGE_SLUG,
+            'asa_svg_support_section'
+        );
+
+        add_settings_field(
+            'force_svg_support',
+            __('Force SVG Support', ASA_TEXT_DOMAIN),
+            array($this, 'force_svg_support_callback'),
+            self::PAGE_SLUG,
+            'asa_svg_support_section'
         );
 
         add_settings_field(
@@ -144,6 +167,8 @@ class ASA_Admin_Settings {
         }
 
         // Sanitize boolean settings
+        $sanitized['enable_svg_support'] = isset($input['enable_svg_support']) ? 1 : 0;
+        $sanitized['force_svg_support'] = isset($input['force_svg_support']) ? 1 : 0;
         $sanitized['enable_svg_sanitization'] = isset($input['enable_svg_sanitization']) ? 1 : 0;
         $sanitized['debug_logging'] = isset($input['debug_logging']) ? 1 : 0;
 
@@ -207,6 +232,38 @@ class ASA_Admin_Settings {
      */
     public function security_section_callback() {
         echo '<p>' . esc_html__('Configure security settings for SVG file handling and processing.', ASA_TEXT_DOMAIN) . '</p>';
+    }
+
+    /**
+     * SVG Support section callback
+     */
+    public function svg_support_section_callback() {
+        echo '<p>' . esc_html__('Configure SVG upload support. The plugin will automatically detect conflicts with other SVG plugins and themes.', ASA_TEXT_DOMAIN) . '</p>';
+        
+        // Show conflict detection status
+        $conflicts = get_option('asa_detected_svg_conflicts', array());
+        if (!empty($conflicts)) {
+            echo '<div class="notice notice-warning inline">';
+            echo '<p><strong>' . esc_html__('SVG Plugin Conflicts Detected:', ASA_TEXT_DOMAIN) . '</strong></p>';
+            echo '<ul>';
+            foreach ($conflicts as $plugin_name) {
+                echo '<li>' . esc_html($plugin_name) . '</li>';
+            }
+            echo '</ul>';
+            echo '<p>' . esc_html__('SVG upload support has been automatically disabled to prevent conflicts.', ASA_TEXT_DOMAIN) . '</p>';
+            echo '</div>';
+        }
+
+        // Show current SVG support status
+        $existing_mimes = get_allowed_mime_types();
+        $svg_supported = isset($existing_mimes['svg']) || in_array('image/svg+xml', $existing_mimes);
+        
+        if ($svg_supported) {
+            echo '<div class="notice notice-info inline">';
+            echo '<p><strong>' . esc_html__('Current Status:', ASA_TEXT_DOMAIN) . '</strong> ';
+            echo esc_html__('SVG uploads are already enabled by WordPress, your theme, or another plugin.', ASA_TEXT_DOMAIN) . '</p>';
+            echo '</div>';
+        }
     }
 
     /**
