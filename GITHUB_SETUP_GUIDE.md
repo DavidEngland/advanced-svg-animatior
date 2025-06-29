@@ -1,7 +1,7 @@
 # GitHub Repository Setup Guide
 
 ## Repository Information
-- **Repository URL**: https://github.com/DavidEngland/advanced-svg-animator
+- **Repository URL**: https://github.com/DavidEngland/advanced-svg-animatior
 - **Owner**: David England
 - **Organization**: Real Estate Intelligence Agency (REIA)
 - **Website**: https://realestate-huntsville.com
@@ -102,7 +102,7 @@ cd "/Users/davidengland/Local Sites/bare/app/public/wp-content/plugins/advanced-
 git init
 
 # Add remote origin
-git remote add origin https://github.com/DavidEngland/advanced-svg-animator.git
+git remote add origin https://github.com/DavidEngland/advanced-svg-animatior.git
 
 # Create .gitignore file
 echo "*.log

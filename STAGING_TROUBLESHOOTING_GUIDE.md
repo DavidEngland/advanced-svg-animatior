@@ -122,7 +122,7 @@ composer install --no-dev
 4. Check performance impact on page load times
 
 ### GitHub Repository:
-- Latest code: https://github.com/DavidEngland/advanced-svg-animator
+- Latest code: https://github.com/DavidEngland/advanced-svg-animatior
 - Report issues: Create GitHub issues for any problems
 - Documentation: All guides available in repository
 

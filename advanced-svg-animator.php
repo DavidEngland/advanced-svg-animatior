@@ -1,7 +1,7 @@
 <?php
 /**
  * Plugin Name: Advanced SVG Animator
- * Plugin URI: https://github.com/DavidEngland/advanced-svg-animator
+ * Plugin URI: https://github.com/DavidEngland/advanced-svg-animatior
  * Description: A comprehensive WordPress plugin for advanced SVG animations with security scanner and real estate icon library. Built by Real Estate Intelligence Agency (REIA) for professional WordPress sites.
  * Version: 1.0.0
  * Author: David England
@@ -14,7 +14,7 @@
  * Tested up to: 6.4
  * Requires PHP: 7.4
  * Network: false
- * GitHub Plugin URI: DavidEngland/advanced-svg-animator
+ * GitHub Plugin URI: DavidEngland/advanced-svg-animatior
  */
 
 // Prevent direct file access

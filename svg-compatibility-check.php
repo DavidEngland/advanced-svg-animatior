@@ -210,7 +210,7 @@ if (file_exists('./wp-config.php')) {
         <p><strong>Need Help?</strong></p>
         <p>For support or questions about Advanced SVG Animator:</p>
         <ul>
-            <li>GitHub Repository: <a href="https://github.com/DavidEngland/advanced-svg-animator" target="_blank">advanced-svg-animator</a></li>
+            <li>GitHub Repository: <a href="https://github.com/DavidEngland/advanced-svg-animatior" target="_blank">advanced-svg-animatior</a></li>
             <li>Documentation: Available in plugin repository</li>
             <li>Real Estate Intelligence Agency: <a href="https://realestate-huntsville.com" target="_blank">realestate-huntsville.com</a></li>
         </ul>
