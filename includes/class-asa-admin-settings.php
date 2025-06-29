@@ -45,49 +45,13 @@ class ASA_Admin_Settings {
      * Add settings page to WordPress admin menu
      */
     public function add_settings_page() {
-        // Enhanced debug logging
-        if (ASA_DEBUG) {
-            error_log('ASA Debug: add_settings_page() called at ' . current_time('mysql'));
-            error_log('ASA Debug: Current user can manage_options: ' . (current_user_can('manage_options') ? 'YES' : 'NO'));
-            error_log('ASA Debug: Current user ID: ' . get_current_user_id());
-            error_log('ASA Debug: Current user roles: ' . implode(', ', wp_get_current_user()->roles ?? []));
-            error_log('ASA Debug: is_admin(): ' . (is_admin() ? 'YES' : 'NO'));
-            error_log('ASA Debug: current_action: ' . current_action());
-        }
-        
-        // Always try to add the menu, regardless of current user (WordPress will handle permissions)
-        $page_hook = add_options_page(
+        add_options_page(
             __('Advanced SVG Animator Settings', ASA_TEXT_DOMAIN),
             __('SVG Animator', ASA_TEXT_DOMAIN),
-            'manage_options', // Standard WordPress capability
+            'manage_options',
             self::PAGE_SLUG,
             array($this, 'render_settings_page')
         );
-        
-        // Debug: Check if page was added successfully
-        if (ASA_DEBUG) {
-            error_log('ASA Debug: Primary settings page hook: ' . ($page_hook ? $page_hook : 'FAILED'));
-        }
-        
-        // Always add fallback top-level menu with lower capability
-        $fallback_hook = add_menu_page(
-            __('SVG Animator Settings', ASA_TEXT_DOMAIN),
-            __('SVG Animator', ASA_TEXT_DOMAIN),
-            'read', // Much lower capability requirement
-            self::PAGE_SLUG . '-fallback',
-            array($this, 'render_settings_page'),
-            'dashicons-art',
-            30
-        );
-        
-        if (ASA_DEBUG) {
-            error_log('ASA Debug: Fallback menu page hook: ' . ($fallback_hook ? $fallback_hook : 'ALSO FAILED'));
-            
-            // Also log global menu state
-            global $menu, $submenu;
-            error_log('ASA Debug: Total menu items: ' . (is_array($menu) ? count($menu) : 'not array'));
-            error_log('ASA Debug: Settings submenu items: ' . (isset($submenu['options-general.php']) ? count($submenu['options-general.php']) : 'none'));
-        }
     }
 
     /**
@@ -225,21 +189,9 @@ class ASA_Admin_Settings {
      * Render the main settings page
      */
     public function render_settings_page() {
-        // Check user capabilities with detailed error message
-        if (!$this->current_user_can_manage_plugin()) {
-            $user = wp_get_current_user();
-            $error_message = sprintf(
-                __('Access Denied: You do not have sufficient permissions to access this page. Current user: %s (ID: %d), Roles: %s. Required capability: manage_options', ASA_TEXT_DOMAIN),
-                $user->user_login,
-                $user->ID,
-                implode(', ', $user->roles ?? ['none'])
-            );
-            
-            if (ASA_DEBUG) {
-                error_log('ASA Debug: Settings page access denied - ' . $error_message);
-            }
-            
-            wp_die($error_message);
+        // Check user capabilities
+        if (!current_user_can('manage_options')) {
+            wp_die(__('You do not have sufficient permissions to access this page.', ASA_TEXT_DOMAIN));
         }
 
         $options = $this->get_plugin_options();
@@ -411,6 +363,72 @@ class ASA_Admin_Settings {
         );
 
         echo '<p class="description">' . esc_html__('When enabled, detailed logs will be written to help troubleshoot SVG upload and sanitization issues.', ASA_TEXT_DOMAIN) . '</p>';
+    }
+
+    /**
+     * Enable SVG support field callback
+     */
+    public function enable_svg_support_callback() {
+        $options = $this->get_plugin_options();
+        $enabled = isset($options['enable_svg_support']) ? $options['enable_svg_support'] : 1;
+        
+        // Check for conflicts
+        $conflicts = get_option('asa_detected_svg_conflicts', array());
+        $has_conflicts = !empty($conflicts);
+        
+        $existing_mimes = get_allowed_mime_types();
+        $svg_already_supported = isset($existing_mimes['svg']) || in_array('image/svg+xml', $existing_mimes);
+
+        printf(
+            '<label><input type="checkbox" name="%s[enable_svg_support]" value="1" %s %s /> %s</label>',
+            esc_attr(self::OPTION_NAME),
+            checked(1, $enabled, false),
+            ($has_conflicts ? 'disabled="disabled"' : ''),
+            esc_html__('Enable SVG upload support via Advanced SVG Animator', ASA_TEXT_DOMAIN)
+        );
+
+        if ($has_conflicts) {
+            echo '<p class="description" style="color: #d63638;">';
+            echo esc_html__('Disabled due to detected plugin conflicts. Deactivate conflicting SVG plugins to enable this option.', ASA_TEXT_DOMAIN);
+            echo '</p>';
+        } elseif ($svg_already_supported) {
+            echo '<p class="description">';
+            echo esc_html__('SVG support is already enabled by another source. You can force this plugin\'s SVG support using the option below.', ASA_TEXT_DOMAIN);
+            echo '</p>';
+        } else {
+            echo '<p class="description">';
+            echo esc_html__('Enable this to allow SVG file uploads through WordPress media library with security scanning and sanitization.', ASA_TEXT_DOMAIN);
+            echo '</p>';
+        }
+    }
+
+    /**
+     * Force SVG support field callback
+     */
+    public function force_svg_support_callback() {
+        $options = $this->get_plugin_options();
+        $enabled = isset($options['force_svg_support']) ? $options['force_svg_support'] : 0;
+        
+        $existing_mimes = get_allowed_mime_types();
+        $svg_already_supported = isset($existing_mimes['svg']) || in_array('image/svg+xml', $existing_mimes);
+        
+        printf(
+            '<label><input type="checkbox" name="%s[force_svg_support]" value="1" %s %s /> %s</label>',
+            esc_attr(self::OPTION_NAME),
+            checked(1, $enabled, false),
+            (!$svg_already_supported ? 'disabled="disabled"' : ''),
+            esc_html__('Force ASA SVG support even when already enabled elsewhere', ASA_TEXT_DOMAIN)
+        );
+
+        if (!$svg_already_supported) {
+            echo '<p class="description">';
+            echo esc_html__('This option is only available when SVG support is already enabled by another source.', ASA_TEXT_DOMAIN);
+            echo '</p>';
+        } else {
+            echo '<p class="description">';
+            echo esc_html__('Warning: This will add ASA\'s SVG hooks even when SVG support already exists, which may cause conflicts. Only enable if you need ASA\'s specific features.', ASA_TEXT_DOMAIN);
+            echo '</p>';
+        }
     }
 
     /**
@@ -656,43 +674,6 @@ class ASA_Admin_Settings {
             }
         }
 
-        return false;
-    }
-
-    /**
-     * Check if current user has admin capabilities
-     * Tries multiple capability checks for compatibility
-     */
-    public function current_user_can_manage_plugin() {
-        // Try multiple capabilities in order of preference
-        $capabilities = [
-            'manage_options',           // Standard admin capability
-            'activate_plugins',         // Plugin management capability
-            'edit_plugins',            // Plugin editing capability
-            'administrator'            // Direct role check (fallback)
-        ];
-        
-        foreach ($capabilities as $capability) {
-            if (current_user_can($capability)) {
-                if (ASA_DEBUG) {
-                    error_log("ASA Debug: User has capability: $capability");
-                }
-                return true;
-            }
-        }
-        
-        // Final fallback: check if user is in administrator role
-        $user = wp_get_current_user();
-        if (in_array('administrator', $user->roles ?? [])) {
-            if (ASA_DEBUG) {
-                error_log('ASA Debug: User has administrator role');
-            }
-            return true;
-        }
-        
-        if (ASA_DEBUG) {
-            error_log('ASA Debug: User does not have required capabilities');
-        }
         return false;
     }
 }
