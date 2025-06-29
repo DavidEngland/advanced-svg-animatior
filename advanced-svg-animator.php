@@ -81,11 +81,11 @@ class ASA_Plugin {
     }
 
     /**
-     * Constructor - Set up plugin hooks
+     * Constructor - Set up plugin hooks only
      */
     private function __construct() {
         $this->init_hooks();
-        $this->load_dependencies();
+        // Dependencies will be loaded when WordPress is ready
     }
 
     /**
@@ -148,8 +148,16 @@ class ASA_Plugin {
         if (file_exists(ASA_PLUGIN_DIR . 'vendor/autoload.php')) {
             require_once ASA_PLUGIN_DIR . 'vendor/autoload.php';
         } else {
-            // Fallback: Load our custom implementation
-            require_once ASA_INCLUDES_DIR . 'class-asa-svg-sanitizer.php';
+            // Check if custom implementation exists before loading
+            $sanitizer_file = ASA_INCLUDES_DIR . 'class-asa-svg-sanitizer.php';
+            if (file_exists($sanitizer_file)) {
+                require_once $sanitizer_file;
+            } else {
+                // Log warning but don't fail - SVG sanitization will use WordPress defaults
+                if (function_exists('error_log')) {
+                    error_log('ASA Warning: SVG sanitizer file not found, using WordPress defaults');
+                }
+            }
         }
     }
 
@@ -162,13 +170,31 @@ class ASA_Plugin {
             require_once ASA_INCLUDES_DIR . 'class-asa-simple-history-logger.php';
         }
         
-        // Load admin settings page
+        // Load admin settings page - instantiate on admin_init to avoid early hook issues
         require_once ASA_INCLUDES_DIR . 'class-asa-admin-settings.php';
-        $this->admin_settings = new ASA_Admin_Settings();
+        add_action('admin_init', array($this, 'init_admin_settings'), 5);
 
-        // Load SVG security scanner admin
+        // Load SVG security scanner admin - instantiate on admin_init to avoid early hook issues
         require_once ASA_INCLUDES_DIR . 'class-asa-svg-scanner-admin.php';
-        $this->svg_scanner_admin = new ASA_SVG_Scanner_Admin();
+        add_action('admin_init', array($this, 'init_svg_scanner_admin'), 5);
+    }
+
+    /**
+     * Initialize admin settings - called on admin_init
+     */
+    public function init_admin_settings() {
+        if (!$this->admin_settings) {
+            $this->admin_settings = new ASA_Admin_Settings();
+        }
+    }
+
+    /**
+     * Initialize SVG scanner admin - called on admin_init
+     */
+    public function init_svg_scanner_admin() {
+        if (!$this->svg_scanner_admin) {
+            $this->svg_scanner_admin = new ASA_SVG_Scanner_Admin();
+        }
     }
 
     /**
@@ -183,6 +209,9 @@ class ASA_Plugin {
      * Initialize the plugin
      */
     public function init_plugin() {
+        // Load dependencies now that WordPress is ready
+        $this->load_dependencies();
+        
         // Load text domain for translations
         load_plugin_textdomain(
             ASA_TEXT_DOMAIN,
@@ -1465,35 +1494,38 @@ class ASA_Plugin {
  * Initialize the plugin when WordPress is ready
  */
 function asa_init_plugin() {
-        return ASA_Plugin::get_instance();
-    }
+    return ASA_Plugin::get_instance();
+}
 
-    /**
-     * Plugin activation hook
-     */
-    function asa_activate() {
-        ASA_Plugin::get_instance()->activate_plugin();
-    }
+/**
+ * Plugin activation hook
+ */
+function asa_activate() {
+    ASA_Plugin::get_instance()->activate_plugin();
+}
 
-    /**
-     * Plugin deactivation hook
-     */
-    function asa_deactivate() {
-        ASA_Plugin::get_instance()->deactivate_plugin();
-    }
+/**
+ * Plugin deactivation hook
+ */
+function asa_deactivate() {
+    ASA_Plugin::get_instance()->deactivate_plugin();
+}
 
-    /**
-     * Plugin uninstallation hook
-     */
-    function asa_uninstall() {
-        ASA_Plugin::get_instance()->uninstall_plugin();
-    }
+/**
+ * Plugin uninstallation hook
+ */
+function asa_uninstall() {
+    ASA_Plugin::get_instance()->uninstall_plugin();
+}
 
-// Initialize plugin on WordPress init
-add_action('init', 'asa_init_plugin');
+// Initialize plugin on WordPress init - REMOVED DUPLICATE
+// The plugin is already initialized in the constructor
 
 // Register activation, deactivation, and uninstall hooks
 register_activation_hook(__FILE__, 'asa_activate');
 register_deactivation_hook(__FILE__, 'asa_deactivate');
 register_uninstall_hook(__FILE__, 'asa_uninstall');
+
+// Initialize the plugin properly - only once
+add_action('plugins_loaded', 'asa_init_plugin');
 
