@@ -19,6 +19,10 @@ vendor/
 .env
 .env.local
 
+# Composer files (exclude lock for WordPress plugins)
+composer.lock
+package-lock.json
+
 # IDE files
 .vscode/
 .idea/

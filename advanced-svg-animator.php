@@ -159,8 +159,10 @@ class ASA_Plugin {
      * Load admin-specific dependencies
      */
     private function load_admin_dependencies() {
-        // Load Simple History logger integration
-        require_once ASA_INCLUDES_DIR . 'class-asa-simple-history-logger.php';
+        // Load Simple History logger integration (only if file exists)
+        if (file_exists(ASA_INCLUDES_DIR . 'class-asa-simple-history-logger.php')) {
+            require_once ASA_INCLUDES_DIR . 'class-asa-simple-history-logger.php';
+        }
         
         // Load admin settings page
         require_once ASA_INCLUDES_DIR . 'class-asa-admin-settings.php';
@@ -585,15 +587,17 @@ class ASA_Plugin {
             ), 'info');
 
             // Log to Simple History
-            ASA_Simple_History_Logger::log_svg_upload(
-                0, // Attachment ID not available yet at this point
-                $file['name'],
-                array(
-                    'size' => $file['size'],
-                    'original_size' => strlen($svg_content),
-                    'sanitized' => true
-                )
-            );
+            if (class_exists('ASA_Simple_History_Logger')) {
+                ASA_Simple_History_Logger::log_svg_upload(
+                    0, // Attachment ID not available yet at this point
+                    $file['name'],
+                    array(
+                        'size' => $file['size'],
+                        'original_size' => strlen($svg_content),
+                        'sanitized' => true
+                    )
+                );
+            }
 
         } catch (Exception $e) {
             $file['error'] = sprintf(
@@ -1040,7 +1044,9 @@ class ASA_Plugin {
         $this->create_plugin_tables();
         
         // Log activation to Simple History
-        ASA_Simple_History_Logger::log_plugin_status('activated');
+        if (class_exists('ASA_Simple_History_Logger')) {
+            ASA_Simple_History_Logger::log_plugin_status('activated');
+        }
         
         // Log activation
         if (defined('ASA_DEBUG') && ASA_DEBUG) {
@@ -1057,7 +1063,9 @@ class ASA_Plugin {
         wp_clear_scheduled_hook('asa_scheduled_svg_scan');
         
         // Log deactivation to Simple History
-        ASA_Simple_History_Logger::log_plugin_status('deactivated');
+        if (class_exists('ASA_Simple_History_Logger')) {
+            ASA_Simple_History_Logger::log_plugin_status('deactivated');
+        }
         
         // Log deactivation
         if (defined('ASA_DEBUG') && ASA_DEBUG) {
