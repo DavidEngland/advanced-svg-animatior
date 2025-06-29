@@ -136,6 +136,11 @@ class ASA_SVG_Security_Scanner {
         // Log scan summary
         $this->log_scan_summary($scan_summary);
         
+        // Log to Simple History
+        if (class_exists('ASA_Simple_History_Logger')) {
+            ASA_Simple_History_Logger::log_bulk_scan($scan_summary);
+        }
+        
         return $scan_summary;
     }
 
@@ -200,6 +205,15 @@ class ASA_SVG_Security_Scanner {
 
         // Store scan result in database
         $this->store_scan_result($scan_result);
+
+        // Log to Simple History if threats were found
+        if (!empty($scan_result['threats']) && class_exists('ASA_Simple_History_Logger')) {
+            ASA_Simple_History_Logger::log_security_scan(
+                $attachment_id,
+                basename($file_path),
+                $scan_result
+            );
+        }
 
         return $scan_result;
     }
@@ -805,6 +819,16 @@ class ASA_SVG_Security_Scanner {
             );
 
             asa_log("SVG file quarantined: {$file_path} -> {$quarantine_path}", 'info');
+            
+            // Log to Simple History
+            if (class_exists('ASA_Simple_History_Logger')) {
+                ASA_Simple_History_Logger::log_svg_quarantine(
+                    $attachment_id,
+                    basename($file_path),
+                    'Security threats detected during scan'
+                );
+            }
+            
             return true;
         }
 
@@ -833,6 +857,18 @@ class ASA_SVG_Security_Scanner {
             );
 
             asa_log("SVG file deleted: attachment ID {$attachment_id}", 'info');
+            
+            // Log to Simple History
+            if (class_exists('ASA_Simple_History_Logger')) {
+                $attachment = get_post($attachment_id);
+                $filename = $attachment ? get_the_title($attachment_id) : "Attachment ID {$attachment_id}";
+                ASA_Simple_History_Logger::log_svg_deletion(
+                    $attachment_id,
+                    $filename,
+                    'security_threat'
+                );
+            }
+            
             return true;
         }
 

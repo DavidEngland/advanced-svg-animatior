@@ -159,6 +159,9 @@ class ASA_Plugin {
      * Load admin-specific dependencies
      */
     private function load_admin_dependencies() {
+        // Load Simple History logger integration
+        require_once ASA_INCLUDES_DIR . 'class-asa-simple-history-logger.php';
+        
         // Load admin settings page
         require_once ASA_INCLUDES_DIR . 'class-asa-admin-settings.php';
         $this->admin_settings = new ASA_Admin_Settings();
@@ -580,6 +583,17 @@ class ASA_Plugin {
                 strlen($svg_content),
                 $bytes_written
             ), 'info');
+
+            // Log to Simple History
+            ASA_Simple_History_Logger::log_svg_upload(
+                0, // Attachment ID not available yet at this point
+                $file['name'],
+                array(
+                    'size' => $file['size'],
+                    'original_size' => strlen($svg_content),
+                    'sanitized' => true
+                )
+            );
 
         } catch (Exception $e) {
             $file['error'] = sprintf(
@@ -1025,6 +1039,9 @@ class ASA_Plugin {
         // Create necessary database tables or options if needed
         $this->create_plugin_tables();
         
+        // Log activation to Simple History
+        ASA_Simple_History_Logger::log_plugin_status('activated');
+        
         // Log activation
         if (defined('ASA_DEBUG') && ASA_DEBUG) {
             error_log('Advanced SVG Animator: Plugin activated');
@@ -1038,6 +1055,9 @@ class ASA_Plugin {
         // Clear scheduled events
         wp_clear_scheduled_hook('asa_daily_svg_scan');
         wp_clear_scheduled_hook('asa_scheduled_svg_scan');
+        
+        // Log deactivation to Simple History
+        ASA_Simple_History_Logger::log_plugin_status('deactivated');
         
         // Log deactivation
         if (defined('ASA_DEBUG') && ASA_DEBUG) {
@@ -1239,6 +1259,22 @@ class ASA_Plugin {
 
         if (empty($svg_content)) {
             $svg_content = '<img src="' . esc_url($svg_url) . '" alt="SVG Image" />';
+        }
+
+        // Log SVG animation block usage to Simple History
+        if (class_exists('ASA_Simple_History_Logger')) {
+            $post_id = get_the_ID();
+            if ($post_id && $animation_type !== 'none') {
+                ASA_Simple_History_Logger::log_animation_block_usage(
+                    $post_id,
+                    $animation_type,
+                    array(
+                        'svg_id' => $svg_id,
+                        'duration' => $duration,
+                        'svg_url' => $svg_url
+                    )
+                );
+            }
         }
 
         $classes = array('asa-svg-animator');
