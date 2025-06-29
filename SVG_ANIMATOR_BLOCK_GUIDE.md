@@ -23,13 +23,18 @@ In the **Block Settings Panel** (right sidebar), you'll find these options:
 ##### **Animation Settings:**
 - **Animation Type**: Choose from multiple animation types:
   - `fadeIn` - Fade in effect
+  - `fadeInUp` - Fade in with upward movement
   - `slideUp/Down/Left/Right` - Slide animations
+  - `slideInBounce` - Slide in with bounce effect
   - `scale` - Scaling effect
+  - `zoomIn` - Zoom in effect
   - `rotate` - Rotation animation
   - `bounce` - Bouncing effect
+  - `flipX/flipY` - Flip animations
   - `drawLine` - Line drawing effect
   - `drawSVGPaths` - Path drawing animation
   - `morphPath` - Path morphing
+  - `typewriter` - Text typewriter effect
 
 ##### **Timing Controls:**
 - **Duration**: How long the animation takes (0.1-10 seconds)
@@ -48,6 +53,19 @@ In the **Block Settings Panel** (right sidebar), you'll find these options:
 - **Custom CSS Class**: Add custom CSS classes
 - **Width/Height**: Control SVG dimensions
 - **Alignment**: Left, center, right alignment
+
+##### **Color Controls (NEW):**
+- **SVG Fill Colors**: Set primary and secondary fill colors for SVG elements
+- **Stroke Color**: Control the outline color of SVG elements
+- **Background Color**: Set background color for the SVG container
+- **Color Targeting**: Define which SVG elements receive each color using CSS selectors
+
+##### **Text Animation (NEW):**
+- **Text Animation**: Enable special text animations for SVG text elements
+- **Animation Type**: Choose typewriter, fade, or other text-specific effects
+- **Speed**: Control the speed of text animations (characters per second)
+- **Split By**: Animate by characters, words, or lines
+- **Stagger Delay**: Delay between each character/word animation
 
 #### 4. **Preview Animation**
 - Use the "Preview Animation" button in the settings to test your animation

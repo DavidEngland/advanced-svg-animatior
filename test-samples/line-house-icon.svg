@@ -33,15 +33,7 @@
         </polyline>
         
         <!-- Door -->
-        <rect x="130" y="190" width="20" height="50">
-            <!-- Door swing animation -->
-            <animateTransform 
-                attributeName="transform"
-                type="rotate"
-                values="0 130 240;-3 130 240;0 130 240"
-                dur="5s"
-                repeatCount="indefinite"/>
-        </rect>
+        <rect x="130" y="190" width="20" height="50"/>
         
         <!-- Door handle -->
         <circle cx="145" cy="215" r="2">

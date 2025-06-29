@@ -21,8 +21,8 @@
                 repeatCount="indefinite"/>
         </line>
         
-        <!-- Sign board -->
-        <rect x="90" y="100" width="120" height="60" rx="5">
+        <!-- Sign board rectangle -->
+        <rect x="80" y="90" width="140" height="70" rx="5" ry="5">
             <!-- Sign bounce -->
             <animateTransform 
                 attributeName="transform"
@@ -32,51 +32,47 @@
                 repeatCount="indefinite"/>
         </rect>
         
-        <!-- Arrow pointing right -->
-        <polyline points="220,130 240,130 235,125">
-            <!-- Arrow pulse -->
-            <animateTransform 
-                attributeName="transform"
-                type="translate"
-                values="0,0;3,0;0,0"
-                dur="2s"
-                repeatCount="indefinite"/>
-        </polyline>
-        <polyline points="235,135 240,130 220,130"/>
+        <!-- Arrow pointing right (no animation) -->
+        <polyline points="230,125 250,125 245,120"/>
+        <polyline points="245,130 250,125 230,125"/>
         
     </g>
     
-    <!-- Text lines (representing text) -->
-    <g stroke="#333" stroke-width="2" stroke-linecap="round">
-        <!-- Main text line -->
-        <line x1="110" y1="120" x2="170" y2="120">
-            <!-- Text emphasis -->
-            <animate attributeName="stroke-width" 
-                     values="2;3;2" 
+    <!-- "FOR SALE" Text -->
+    <g font-family="Arial, sans-serif" font-weight="bold" text-anchor="middle" fill="#333">
+        <!-- FOR text -->
+        <text x="150" y="115" font-size="16">
+            FOR
+            <!-- Text pulse animation -->
+            <animate attributeName="fill" 
+                     values="#333;#555;#333" 
                      dur="2s" 
                      repeatCount="indefinite"/>
-        </line>
+        </text>
         
-        <!-- Secondary text line -->
-        <line x1="120" y1="135" x2="160" y2="135" opacity="0.7"/>
-        
-        <!-- Contact line -->
-        <line x1="110" y1="145" x2="185" y2="145" 
-              stroke-width="1" 
-              opacity="0.5"/>
+        <!-- SALE text -->
+        <text x="150" y="140" font-size="16">
+            SALE
+            <!-- Text pulse animation with delay -->
+            <animate attributeName="fill" 
+                     values="#333;#555;#333" 
+                     dur="2s" 
+                     begin="0.5s"
+                     repeatCount="indefinite"/>
+        </text>
     </g>
     
     <!-- Animated border accent -->
-    <rect x="85" y="95" width="130" height="70" 
+    <rect x="75" y="85" width="150" height="80" 
           fill="none" 
           stroke="#666" 
           stroke-width="1" 
-          stroke-dasharray="3,3" 
-          opacity="0.3" 
-          rx="5">
+          stroke-dasharray="4,4" 
+          opacity="0.4" 
+          rx="8">
         <animate attributeName="stroke-dashoffset" 
-                 values="0;6" 
-                 dur="1.5s" 
+                 values="0;8" 
+                 dur="2s" 
                  repeatCount="indefinite"/>
     </rect>
     
@@ -93,7 +89,7 @@
           font-size="14" 
           fill="#333" 
           font-weight="300">
-        For Sale
+        Real Estate Sign
     </text>
     
 </svg>

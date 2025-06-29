@@ -15,8 +15,11 @@ The Advanced SVG Animator is a comprehensive WordPress plugin for creating and m
 🎯 **Gutenberg Block Integration**: Drag-and-drop SVG animation block for the WordPress editor  
 🔒 **Secure SVG Upload**: Role-based permissions with robust SVG sanitization  
 🛡️ **SVG Security Scanner**: Advanced threat detection with automated scanning and batch actions  
-🎨 **9 Animation Presets**: Fade, slide, scale, rotate, bounce, and path drawing animations  
+🎨 **15+ Animation Presets**: Fade, slide, scale, rotate, bounce, flip, zoom, typewriter, and path drawing animations  
 ⚙️ **Advanced Controls**: Duration, delay, iteration, timing functions, and custom CSS  
+🎨 **Color Customization**: Background colors, SVG fill colors, gradients, and multi-element color targeting  
+📝 **Text Animation**: Typewriter effects, character-by-character reveals, and staggered text animations  
+🎯 **Precise Targeting**: CSS selectors for animating specific SVG elements  
 📱 **Responsive Design**: Mobile-friendly animations with accessibility support  
 🚀 **Performance Optimized**: Scroll-triggered animations and reduced motion support  
 
@@ -79,8 +82,10 @@ advanced-svg-animator/
 - ✅ **SVG Animator Block**: Complete Gutenberg block for SVG animations
 - ✅ **Media Library Integration**: Select SVG files directly from WordPress media
 - ✅ **Inline SVG Rendering**: SVGs embedded as inline code for CSS targeting
-- ✅ **9 Predefined Animations**: Fade, slide, scale, rotate, bounce, and draw line effects
+- ✅ **15+ Predefined Animations**: Fade, slide, scale, rotate, bounce, flip, zoom, typewriter, and draw effects
 - ✅ **Advanced Controls**: Duration, delay, iteration count, timing functions
+- ✅ **Color Customization**: Background colors, SVG fill colors, gradients, and precise color targeting
+- ✅ **Text Animation System**: Typewriter effects, character reveals, and staggered animations
 - ✅ **Real-time Preview**: See animations as you configure them in the editor
 - ✅ **Custom CSS Classes**: Support for advanced user animations
 - ✅ **Responsive Design**: Mobile-friendly with accessibility features
@@ -197,12 +202,29 @@ $default_options = array(
 
 ## Animation Presets
 
-The plugin includes several built-in animation presets:
+The plugin includes comprehensive built-in animation presets:
 
+### **Basic Animations**
 - **Fade In**: Opacity transition from 0 to 1
-- **Slide In Left**: Transform translateX animation
-- **Scale Up**: Transform scale animation with elastic easing
+- **Slide In Left/Right/Up/Down**: Transform translateX/Y animations
+- **Scale/Zoom In**: Transform scale animation with elastic easing
 - **Rotate 360°**: Continuous rotation animation
+
+### **Advanced Animations**
+- **Bounce**: Elastic bounce effect with spring timing
+- **Flip X/Y**: 3D flip transformations
+- **Slide In Bounce**: Combined slide and bounce effects
+- **Fade In Up**: Fade with upward movement
+
+### **SVG-Specific Animations**
+- **Draw Line**: Progressive line drawing effect
+- **Draw SVG Paths**: Animate SVG path strokes
+- **Morph Path**: Transform between different path shapes
+
+### **Text Animations**
+- **Typewriter**: Character-by-character reveal
+- **Staggered Text**: Character/word delays
+- **Text Fade In**: Progressive text appearance
 
 ## Usage Examples
 

@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" 
+     viewBox="0 0 300 300" 
+     width="300" 
+     height="300">
+    
+    <!-- Background -->
+    <rect width="300" height="300" fill="white"/>
+    
+    <!-- Construction/Year Built representation -->
+    <g fill="none" stroke="#333" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+        
+        <!-- Construction site outline -->
+        <rect x="90" y="140" width="120" height="80" rx="5">
+            <!-- Gentle pulse -->
+            <animateTransform 
+                attributeName="transform"
+                type="scale"
+                values="1;1.01;1"
+                dur="4s"
+                repeatCount="indefinite"/>
+        </rect>
+        
+        <!-- Crane -->
+        <g stroke-width="2">
+            <!-- Crane mast -->
+            <line x1="220" y1="100" x2="220" y2="200"/>
+            
+            <!-- Crane arm -->
+            <line x1="220" y1="120" x2="270" y2="120"/>
+            <line x1="180" y1="120" x2="220" y2="120"/>
+            
+            <!-- Crane hook -->
+            <circle cx="250" cy="130" r="3">
+                <!-- Hook sway -->
+                <animateTransform 
+                    attributeName="transform"
+                    type="translate"
+                    values="0,0;3,0;0,0;-3,0;0,0"
+                    dur="4s"
+                    repeatCount="indefinite"/>
+            </circle>
+            <line x1="250" y1="120" x2="250" y2="127"/>
+        </g>
+        
+        <!-- Foundation -->
+        <rect x="95" y="210" width="110" height="10" stroke-width="2"/>
+        
+        <!-- Construction materials -->
+        <g stroke-width="2" opacity="0.7">
+            <!-- Brick stack -->
+            <rect x="100" y="195" width="15" height="8"/>
+            <rect x="100" y="187" width="15" height="8"/>
+            <rect x="100" y="179" width="15" height="8"/>
+            
+            <!-- Lumber -->
+            <line x1="130" y1="180" x2="170" y2="180"/>
+            <line x1="130" y1="185" x2="170" y2="185"/>
+            <line x1="130" y1="190" x2="170" y2="190"/>
+        </g>
+        
+        <!-- Building frame -->
+        <g stroke-width="2" opacity="0.8">
+            <line x1="110" y1="140" x2="110" y2="190"/>
+            <line x1="130" y1="140" x2="130" y2="190"/>
+            <line x1="150" y1="140" x2="150" y2="190"/>
+            <line x1="170" y1="140" x2="170" y2="190"/>
+            <line x1="190" y1="140" x2="190" y2="190"/>
+        </g>
+        
+        <!-- Calendar/Year display -->
+        <rect x="120" y="100" width="50" height="35" rx="3" stroke-width="2">
+            <animate attributeName="stroke" 
+                     values="#333;#555;#333" 
+                     dur="3s" 
+                     repeatCount="indefinite"/>
+        </rect>
+        
+        <!-- Calendar rings -->
+        <circle cx="130" cy="95" r="2" stroke-width="1"/>
+        <circle cx="160" cy="95" r="2" stroke-width="1"/>
+        
+        <!-- Year text -->
+        <text x="145" y="125" 
+              text-anchor="middle" 
+              font-family="Arial, sans-serif" 
+              font-size="14" 
+              font-weight="bold" 
+              fill="#333">
+            2024
+            <animate attributeName="fill" 
+                     values="#333;#555;#333" 
+                     dur="2s" 
+                     repeatCount="indefinite"/>
+        </text>
+        
+        <!-- Hard hat -->
+        <path d="M 60 150 Q 75 140 90 150" stroke-width="2" opacity="0.8">
+            <!-- Hat highlight -->
+            <animate attributeName="opacity" 
+                     values="0.8;0.5;0.8" 
+                     dur="3s" 
+                     repeatCount="indefinite"/>
+        </path>
+        
+    </g>
+    
+    <!-- Animated border accent -->
+    <rect x="55" y="95" width="170" height="130" 
+          fill="none" 
+          stroke="#666" 
+          stroke-width="1" 
+          stroke-dasharray="4,4" 
+          opacity="0.3" 
+          rx="10">
+        <animate attributeName="stroke-dashoffset" 
+                 values="0;8" 
+                 dur="2s" 
+                 repeatCount="indefinite"/>
+    </rect>
+    
+    <!-- Ground line -->
+    <line x1="50" y1="250" x2="250" y2="250" 
+          stroke="#333" 
+          stroke-width="2" 
+          opacity="0.3"/>
+    
+    <!-- Minimalist title -->
+    <text x="150" y="280" 
+          text-anchor="middle" 
+          font-family="Arial, sans-serif" 
+          font-size="14" 
+          fill="#333" 
+          font-weight="300">
+        Year Built
+    </text>
+    
+</svg>

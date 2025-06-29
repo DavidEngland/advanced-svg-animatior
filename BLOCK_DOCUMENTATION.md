@@ -13,17 +13,39 @@ The **SVG Animator Block** is a powerful Gutenberg block that allows users to in
 - **Responsive Design**: SVGs automatically adapt to different screen sizes
 
 ### 🎨 Animation Types
-The block includes 9 predefined animation types:
+The block includes 17 predefined animation types:
 
 1. **Fade In**: Smooth opacity transition from 0 to 1
-2. **Slide Up**: Enters from below with vertical movement
-3. **Slide Down**: Enters from above with vertical movement  
-4. **Slide Left**: Enters from right with horizontal movement
-5. **Slide Right**: Enters from left with horizontal movement
-6. **Scale**: Grows from scale(0) to scale(1)
-7. **Rotate**: Spins 360 degrees while fading in
-8. **Bounce**: Energetic bouncing effect with cubic-bezier timing
-9. **Draw Line**: Special animation for SVG paths using stroke-dasharray
+2. **Fade In Up**: Fade in with upward movement
+3. **Slide Up**: Enters from below with vertical movement
+4. **Slide Down**: Enters from above with vertical movement  
+5. **Slide Left**: Enters from right with horizontal movement
+6. **Slide Right**: Enters from left with horizontal movement
+7. **Slide In Bounce**: Slide in with bounce effect
+8. **Scale**: Grows from scale(0) to scale(1)
+9. **Zoom In**: Zoom in effect with scaling
+10. **Rotate**: Spins 360 degrees while fading in
+11. **Bounce**: Energetic bouncing effect with cubic-bezier timing
+12. **Flip X**: Horizontal flip animation
+13. **Flip Y**: Vertical flip animation
+14. **Draw Line**: Special animation for SVG paths using stroke-dasharray
+15. **Draw SVG Paths**: Path drawing animation for complex SVGs
+16. **Morph Path**: Path morphing animation
+17. **Typewriter**: Text typewriter effect for SVG text elements
+
+### 🎨 Color Controls (NEW)
+- **SVG Fill Colors**: Set primary and secondary fill colors for different SVG elements
+- **Stroke Color**: Control the outline/border color of SVG elements  
+- **Background Color**: Set background color for the SVG container
+- **Color Targeting**: Define which SVG elements receive each color using CSS selectors
+- **Supports Gradients**: WordPress color picker with gradient support
+
+### ✍️ Text Animation (NEW)
+- **Text Animation Toggle**: Enable/disable text-specific animations
+- **Animation Types**: Typewriter, fade, and other text-focused effects
+- **Speed Control**: Adjust animation speed (characters per second)
+- **Split Options**: Animate by characters, words, or lines
+- **Stagger Delay**: Control timing between individual character/word animations
 
 ### ⚙️ Animation Controls
 - **Duration**: 0.1 to 10 seconds (adjustable in 0.1s increments)

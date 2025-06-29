@@ -7,19 +7,11 @@
     <!-- Background -->
     <rect width="300" height="300" fill="#f5f5dc"/>
     
-    <!-- Sign Post -->
+    <!-- Sign Post (no movement) -->
     <rect x="145" y="150" width="10" height="120" 
           fill="#8b4513" 
           stroke="#654321" 
-          stroke-width="1">
-        <!-- Gentle sway animation -->
-        <animateTransform 
-            attributeName="transform"
-            type="rotate"
-            values="0 150 150;2 150 150;0 150 150;-2 150 150;0 150 150"
-            dur="4s"
-            repeatCount="indefinite"/>
-    </rect>
+          stroke-width="1"/>
     
     <!-- Main Sign Board -->
     <rect x="80" y="80" width="140" height="80" 
@@ -37,10 +29,10 @@
     </rect>
     
     <!-- FOR SALE Text -->
-    <text x="150" y="105" 
+    <text x="150" y="120" 
           text-anchor="middle" 
           font-family="Impact, Arial Black, sans-serif" 
-          font-size="18" 
+          font-size="20" 
           font-weight="bold" 
           fill="white">
         FOR SALE
@@ -48,15 +40,6 @@
                  values="white;#ffff00;white" 
                  dur="2s" 
                  repeatCount="indefinite"/>
-    </text>
-    
-    <!-- Contact Info -->
-    <text x="150" y="125" 
-          text-anchor="middle" 
-          font-family="Arial, sans-serif" 
-          font-size="10" 
-          fill="white">
-        Call (555) 123-4567
     </text>
     
     <!-- Small "SOLD" banner that appears occasionally -->
@@ -93,99 +76,7 @@
                  repeatCount="indefinite"/>
     </text>
     
-    <!-- Arrow pointing to property -->
-    <polygon points="250,140 270,150 250,160" 
-             fill="#32cd32" 
-             stroke="#228b22" 
-             stroke-width="2">
-        <!-- Pulsing arrow -->
-        <animate attributeName="fill" 
-                 values="#32cd32;#7fff00;#32cd32" 
-                 dur="1.5s" 
-                 repeatCount="indefinite"/>
-        <animateTransform 
-            attributeName="transform"
-            type="translate"
-            values="0,0;5,0;0,0"
-            dur="1.5s"
-            repeatCount="indefinite"/>
-    </polygon>
-    
-    <!-- Small house silhouette -->
-    <g transform="translate(250, 120)">
-        <!-- House base -->
-        <rect x="0" y="10" width="20" height="15" fill="#4169e1"/>
-        <!-- Roof -->
-        <polygon points="0,10 10,0 20,10" fill="#8b0000"/>
-        <!-- Door -->
-        <rect x="8" y="15" width="4" height="10" fill="#654321"/>
-        <!-- Window -->
-        <rect x="3" y="15" width="3" height="3" fill="#87ceeb"/>
-        <rect x="14" y="15" width="3" height="3" fill="#87ceeb"/>
-        
-        <!-- Gentle house glow -->
-        <animate attributeName="opacity" 
-                 values="0.8;1;0.8" 
-                 dur="3s" 
-                 repeatCount="indefinite"/>
-    </g>
-    
-    <!-- Decorative elements -->
-    <circle cx="50" cy="200" r="3" fill="#ff69b4">
-        <animate attributeName="r" 
-                 values="3;5;3" 
-                 dur="2s" 
-                 repeatCount="indefinite"/>
-    </circle>
-    
-    <circle cx="250" cy="220" r="4" fill="#dda0dd">
-        <animate attributeName="r" 
-                 values="4;6;4" 
-                 dur="2.5s" 
-                 repeatCount="indefinite"/>
-    </circle>
-    
     <!-- Ground -->
     <rect x="0" y="250" width="300" height="50" fill="#90ee90"/>
     
-    <!-- Dollar signs floating -->
-    <text x="60" y="80" 
-          font-family="Arial, sans-serif" 
-          font-size="20" 
-          font-weight="bold" 
-          fill="#228b22" 
-          opacity="0.7">
-        $
-        <animateTransform 
-            attributeName="transform"
-            type="translate"
-            values="0,0;0,-20;0,0"
-            dur="3s"
-            repeatCount="indefinite"/>
-        <animate attributeName="opacity" 
-                 values="0.7;0.2;0.7" 
-                 dur="3s" 
-                 repeatCount="indefinite"/>
-    </text>
-    
-    <text x="240" y="90" 
-          font-family="Arial, sans-serif" 
-          font-size="16" 
-          font-weight="bold" 
-          fill="#228b22" 
-          opacity="0.6">
-        $
-        <animateTransform 
-            attributeName="transform"
-            type="translate"
-            values="0,0;0,-15;0,0"
-            dur="4s"
-            begin="1s"
-            repeatCount="indefinite"/>
-        <animate attributeName="opacity" 
-                 values="0.6;0.1;0.6" 
-                 dur="4s" 
-                 begin="1s"
-                 repeatCount="indefinite"/>
-    </text>
 </svg>

@@ -18,7 +18,22 @@
 		},
 		"color": {
 			"background": true,
-			"text": false
+			"text": false,
+			"gradients": true,
+			"__experimentalDefaultControls": {
+				"background": true
+			}
+		},
+		"typography": {
+			"fontSize": true,
+			"lineHeight": true,
+			"__experimentalFontFamily": true,
+			"__experimentalFontWeight": true,
+			"__experimentalTextDecoration": true,
+			"__experimentalTextTransform": true,
+			"__experimentalDefaultControls": {
+				"fontSize": true
+			}
 		}
 	},
 	"attributes": {
@@ -37,7 +52,7 @@
 		"animationType": {
 			"type": "string",
 			"default": "none",
-			"enum": ["none", "fadeIn", "slideUp", "slideDown", "slideLeft", "slideRight", "scale", "rotate", "bounce", "drawLine", "drawSVGPaths", "morphPath"]
+			"enum": ["none", "fadeIn", "slideUp", "slideDown", "slideLeft", "slideRight", "scale", "rotate", "bounce", "drawLine", "drawSVGPaths", "morphPath", "typewriter", "fadeInUp", "zoomIn", "flipX", "flipY", "slideInBounce"]
 		},
 		"duration": {
 			"type": "number",
@@ -103,6 +118,42 @@
 				"staggerDelay": 0,
 				"reverseOnComplete": false
 			}
+		},
+		"svgColors": {
+			"type": "object",
+			"default": {
+				"primaryFill": "",
+				"secondaryFill": "",
+				"strokeColor": "",
+				"backgroundColor": ""
+			},
+			"description": "Colors for SVG elements - primaryFill, secondaryFill, strokeColor, backgroundColor"
+		},
+		"colorTargets": {
+			"type": "object",
+			"default": {
+				"primarySelector": "path, circle, rect, polygon, ellipse",
+				"secondarySelector": "",
+				"strokeSelector": "",
+				"backgroundSelector": "svg"
+			},
+			"description": "CSS selectors for applying colors to specific SVG elements"
+		},
+		"textAnimation": {
+			"type": "object",
+			"default": {
+				"enabled": false,
+				"animationType": "typewriter",
+				"speed": 50,
+				"splitBy": "chars",
+				"staggerDelay": 0.1
+			},
+			"description": "Text animation settings for SVG text elements"
+		},
+		"textSelectors": {
+			"type": "array",
+			"default": [],
+			"description": "Array of CSS selectors targeting text elements in SVG"
 		},
 		"width": {
 			"type": "string",

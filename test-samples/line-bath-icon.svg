@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" 
+     viewBox="0 0 300 300" 
+     width="300" 
+     height="300">
+    
+    <!-- Background -->
+    <rect width="300" height="300" fill="white"/>
+    
+    <!-- Bathroom fixtures -->
+    <g fill="none" stroke="#333" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+        
+        <!-- Bathtub -->
+        <ellipse cx="150" cy="180" rx="80" ry="25">
+            <!-- Gentle water ripple -->
+            <animate attributeName="ry" 
+                     values="25;27;25" 
+                     dur="3s" 
+                     repeatCount="indefinite"/>
+        </ellipse>
+        
+        <!-- Bathtub sides -->
+        <path d="M 70 180 L 70 160 Q 70 150 80 150 L 220 150 Q 230 150 230 160 L 230 180"/>
+        
+        <!-- Faucet -->
+        <circle cx="150" cy="140" r="8" stroke-width="2"/>
+        <rect x="145" y="132" width="10" height="8" rx="2" stroke-width="2"/>
+        
+        <!-- Water drops -->
+        <g stroke-width="2" opacity="0.7">
+            <circle cx="150" cy="155" r="2">
+                <!-- Water drop animation -->
+                <animate attributeName="cy" 
+                         values="155;175;155" 
+                         dur="1.5s" 
+                         repeatCount="indefinite"/>
+                <animate attributeName="opacity" 
+                         values="0.7;0.2;0.7" 
+                         dur="1.5s" 
+                         repeatCount="indefinite"/>
+            </circle>
+            <circle cx="153" cy="160" r="1.5">
+                <animate attributeName="cy" 
+                         values="160;175;160" 
+                         dur="1.8s" 
+                         begin="0.5s"
+                         repeatCount="indefinite"/>
+                <animate attributeName="opacity" 
+                         values="0.5;0.1;0.5" 
+                         dur="1.8s" 
+                         begin="0.5s"
+                         repeatCount="indefinite"/>
+            </circle>
+        </g>
+        
+        <!-- Drain -->
+        <circle cx="150" cy="180" r="3" stroke-width="1" opacity="0.5"/>
+        
+        <!-- Bathtub feet -->
+        <ellipse cx="90" cy="205" rx="8" ry="4"/>
+        <ellipse cx="210" cy="205" rx="8" ry="4"/>
+        
+        <!-- Shower head (optional) -->
+        <circle cx="200" cy="100" r="12" stroke-width="2"/>
+        <line x1="200" y1="100" x2="200" y2="120" stroke-width="2"/>
+        
+        <!-- Shower spray lines -->
+        <g stroke-width="1" opacity="0.6">
+            <line x1="195" y1="115" x2="195" y2="130">
+                <animate attributeName="opacity" 
+                         values="0.6;0.2;0.6" 
+                         dur="2s" 
+                         repeatCount="indefinite"/>
+            </line>
+            <line x1="200" y1="115" x2="200" y2="130">
+                <animate attributeName="opacity" 
+                         values="0.6;0.2;0.6" 
+                         dur="2s" 
+                         begin="0.3s"
+                         repeatCount="indefinite"/>
+            </line>
+            <line x1="205" y1="115" x2="205" y2="130">
+                <animate attributeName="opacity" 
+                         values="0.6;0.2;0.6" 
+                         dur="2s" 
+                         begin="0.6s"
+                         repeatCount="indefinite"/>
+            </line>
+        </g>
+        
+    </g>
+    
+    <!-- Animated border accent -->
+    <rect x="60" y="90" width="180" height="130" 
+          fill="none" 
+          stroke="#666" 
+          stroke-width="1" 
+          stroke-dasharray="4,4" 
+          opacity="0.3" 
+          rx="10">
+        <animate attributeName="stroke-dashoffset" 
+                 values="0;8" 
+                 dur="2s" 
+                 repeatCount="indefinite"/>
+    </rect>
+    
+    <!-- Ground line -->
+    <line x1="50" y1="250" x2="250" y2="250" 
+          stroke="#333" 
+          stroke-width="2" 
+          opacity="0.3"/>
+    
+    <!-- Minimalist title -->
+    <text x="150" y="280" 
+          text-anchor="middle" 
+          font-family="Arial, sans-serif" 
+          font-size="14" 
+          fill="#333" 
+          font-weight="300">
+        Bathroom
+    </text>
+    
+</svg>
