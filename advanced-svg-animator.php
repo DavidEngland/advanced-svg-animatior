@@ -297,8 +297,12 @@ class ASA_Plugin {
                 ) . '</p>';
                 echo '<p>' . esc_html__('SVG upload support has been automatically disabled to prevent conflicts. Animation and security features will still work.', ASA_TEXT_DOMAIN) . '</p>';
                 echo '<p>';
-                echo '<a href="' . esc_url(admin_url('options-general.php?page=asa-settings')) . '" class="button button-secondary">' . esc_html__('Manage Settings', ASA_TEXT_DOMAIN) . '</a> ';
-                echo '<a href="' . esc_url(admin_url('tools.php?page=asa-svg-scanner')) . '" class="button button-secondary">' . esc_html__('SVG Scanner', ASA_TEXT_DOMAIN) . '</a>';
+                if (current_user_can('manage_options')) {
+                    echo '<a href="' . esc_url(admin_url('options-general.php?page=asa-settings')) . '" class="button button-secondary">' . esc_html__('Manage Settings', ASA_TEXT_DOMAIN) . '</a> ';
+                    echo '<a href="' . esc_url(admin_url('tools.php?page=asa-svg-scanner')) . '" class="button button-secondary">' . esc_html__('SVG Scanner', ASA_TEXT_DOMAIN) . '</a>';
+                } else {
+                    echo '<em>' . esc_html__('Contact your administrator to manage plugin settings.', ASA_TEXT_DOMAIN) . '</em>';
+                }
                 echo '</p>';
                 echo '</div>';
             });
@@ -308,7 +312,11 @@ class ASA_Plugin {
                 echo '<p><strong>' . esc_html__('Advanced SVG Animator - SVG Support Detected', ASA_TEXT_DOMAIN) . '</strong></p>';
                 echo '<p>' . esc_html__('SVG uploads are already enabled by your theme or another plugin. ASA\'s animation and security features are active.', ASA_TEXT_DOMAIN) . '</p>';
                 echo '<p>';
-                echo '<a href="' . esc_url(admin_url('options-general.php?page=asa-settings')) . '" class="button button-secondary">' . esc_html__('Configure Settings', ASA_TEXT_DOMAIN) . '</a>';
+                if (current_user_can('manage_options')) {
+                    echo '<a href="' . esc_url(admin_url('options-general.php?page=asa-settings')) . '" class="button button-secondary">' . esc_html__('Configure Settings', ASA_TEXT_DOMAIN) . '</a>';
+                } else {
+                    echo '<em>' . esc_html__('Contact your administrator to configure plugin settings.', ASA_TEXT_DOMAIN) . '</em>';
+                }
                 echo '</p>';
                 echo '</div>';
             });
