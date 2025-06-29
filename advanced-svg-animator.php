@@ -92,10 +92,13 @@ class ASA_Plugin {
      * Initialize WordPress hooks
      */
     private function init_hooks() {
-        // Core plugin hooks
-        add_action('init', array($this, 'init_plugin'));
-        add_action('plugins_loaded', array($this, 'early_init'), 5); // Load admin classes early
-        add_action('admin_init', array($this, 'admin_init'));
+        // Load textdomain early but safely
+        add_action('init', array($this, 'load_textdomain'), 1);
+        
+        // Core plugin hooks - use later priorities to avoid conflicts
+        add_action('init', array($this, 'init_plugin'), 25);
+        add_action('admin_menu', array($this, 'early_admin_init'), 5); // Load admin classes just before menu
+        add_action('admin_init', array($this, 'admin_init'), 15);
         add_action('wp_enqueue_scripts', array($this, 'enqueue_frontend_scripts'));
         add_action('admin_enqueue_scripts', array($this, 'enqueue_admin_scripts'));
 
@@ -192,42 +195,51 @@ class ASA_Plugin {
      * Initialize the plugin
      */
     public function init_plugin() {
-        // Load remaining dependencies (frontend only, admin already loaded in early_init)
+        // Load remaining dependencies (frontend only, admin already loaded in early_admin_init)
         if (!is_admin()) {
             $this->load_svg_sanitizer();
             $this->load_frontend_dependencies();
         }
-        
-        // Load text domain for translations
-        load_plugin_textdomain(
-            ASA_TEXT_DOMAIN,
-            false,
-            dirname(ASA_PLUGIN_BASENAME) . '/languages'
-        );
 
         // Initialize plugin components
         $this->init_components();
     }
 
     /**
-     * Early initialization - load admin classes before admin_menu hook
+     * Early admin initialization - load admin classes just before admin_menu
      */
-    public function early_init() {
+    public function early_admin_init() {
         if (ASA_DEBUG) {
-            error_log('ASA Debug: early_init() called - loading admin dependencies');
+            error_log('ASA Debug: early_admin_init() called via admin_menu hook');
         }
         
-        // Load SVG sanitization library first
-        $this->load_svg_sanitizer();
-        
-        // Load admin dependencies early if in admin area
-        if (is_admin()) {
+        // Only proceed if we're in admin and haven't already loaded dependencies
+        if (is_admin() && !$this->admin_settings) {
+            // Load SVG sanitization library first
+            $this->load_svg_sanitizer();
+            
+            // Load admin dependencies 
             $this->load_admin_dependencies();
             
             if (ASA_DEBUG) {
-                error_log('ASA Debug: Admin dependencies loaded in early_init()');
+                error_log('ASA Debug: Admin dependencies loaded in early_admin_init()');
                 error_log('ASA Debug: Admin settings instance: ' . (is_object($this->admin_settings) ? 'Created' : 'Failed'));
             }
+        }
+    }
+
+    /**
+     * Load plugin text domain for translations
+     */
+    public function load_textdomain() {
+        load_plugin_textdomain(
+            ASA_TEXT_DOMAIN,
+            false,
+            dirname(ASA_PLUGIN_BASENAME) . '/languages'
+        );
+        
+        if (ASA_DEBUG) {
+            error_log('ASA Debug: Text domain loaded at init priority 1');
         }
     }
 
@@ -1534,14 +1546,11 @@ function asa_uninstall() {
     ASA_Plugin::get_instance()->uninstall_plugin();
 }
 
-// Initialize plugin on WordPress init - REMOVED DUPLICATE
-// The plugin is already initialized in the constructor
-
 // Register activation, deactivation, and uninstall hooks
 register_activation_hook(__FILE__, 'asa_activate');
 register_deactivation_hook(__FILE__, 'asa_deactivate');
 register_uninstall_hook(__FILE__, 'asa_uninstall');
 
-// Initialize the plugin properly - only once
-add_action('plugins_loaded', 'asa_init_plugin');
+// Initialize the plugin properly - use init hook instead of plugins_loaded to avoid conflicts
+add_action('init', 'asa_init_plugin', 20); // Higher priority to load after other plugins
 
