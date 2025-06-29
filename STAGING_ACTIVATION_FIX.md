@@ -114,6 +114,19 @@ private function load_admin_dependencies() {
 
 ### If Issues Persist
 
+#### Known Plugin Conflicts
+
+**Connections Plugin Conflict (RESOLVED)**
+- **Issue**: Connections plugin loading textdomain too early causes activation conflicts
+- **Solution**: 
+  1. Temporarily deactivate Connections plugin
+  2. Activate Advanced SVG Animator 
+  3. Reactivate Connections plugin
+  4. Both plugins will work together normally
+- **Note**: Debug notice about "connections domain" is from Connections plugin, not ours
+
+#### General Troubleshooting
+
 1. **Enable WordPress Debug Mode**
    ```php
    define('WP_DEBUG', true);
