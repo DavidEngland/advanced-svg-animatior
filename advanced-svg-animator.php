@@ -105,12 +105,10 @@ class ASA_Plugin {
         // REST API hooks
         add_action('rest_api_init', array($this, 'register_rest_routes'));
 
-        // SVG support hooks
-        add_filter('upload_mimes', array($this, 'enable_svg_mime_types'));
-        add_action('admin_head', array($this, 'enable_svg_media_previews'));
-        add_filter('wp_check_filetype_and_ext', array($this, 'fix_svg_mime_type'), 10, 5);
+        // SVG support hooks (conditional to avoid conflicts)
+        add_action('init', array($this, 'maybe_enable_svg_support'));
 
-        // Security hooks
+        // Security hooks (always enabled for safety)
         add_filter('wp_handle_upload_prefilter', array($this, 'asa_sanitize_svg_on_upload'), 10, 1);
         add_filter('wp_handle_upload_prefilter', array($this, 'enhanced_svg_scan_on_upload'), 15, 1);
         add_filter('wp_handle_upload_prefilter', array($this, 'check_svg_upload_security'), 20, 1);
@@ -197,6 +195,23 @@ class ASA_Plugin {
     }
 
     /**
+     * Conditionally enable SVG support to avoid conflicts
+     */
+    public function maybe_enable_svg_support() {
+        // Check if we should enable SVG support
+        if ($this->should_enable_svg_support()) {
+            // Add SVG support hooks
+            add_filter('upload_mimes', array($this, 'enable_svg_mime_types'));
+            add_action('admin_head', array($this, 'enable_svg_media_previews'));
+            add_filter('wp_check_filetype_and_ext', array($this, 'fix_svg_mime_type'), 10, 5);
+            
+            asa_log('Advanced SVG Animator: SVG support enabled', 'info');
+        } else {
+            asa_log('Advanced SVG Animator: SVG support disabled to avoid conflicts', 'info');
+        }
+    }
+
+    /**
      * Initialize plugin components
      */
     private function init_components() {
@@ -210,6 +225,7 @@ class ASA_Plugin {
     public function admin_init() {
         // Admin-specific initialization
         $this->check_plugin_requirements();
+        $this->check_svg_plugin_conflicts();
     }
 
     /**
@@ -229,6 +245,36 @@ class ASA_Plugin {
         }
 
         return true;
+    }
+
+    /**
+     * Check for SVG plugin conflicts and show admin notices
+     */
+    private function check_svg_plugin_conflicts() {
+        $conflicting_plugins = array(
+            'safe-svg/safe-svg.php' => 'Safe SVG',
+            'svg-support/svg-support.php' => 'SVG Support', 
+            'enable-svg-uploads/enable-svg-uploads.php' => 'Enable SVG Uploads',
+            'wp-svg-icons/wp-svg-icons.php' => 'WP SVG Icons',
+            'svg-upload-and-sanitizer/svg-upload-and-sanitizer.php' => 'SVG Upload and Sanitizer'
+        );
+
+        $active_conflicts = array();
+        foreach ($conflicting_plugins as $plugin_file => $plugin_name) {
+            if (is_plugin_active($plugin_file)) {
+                $active_conflicts[] = $plugin_name;
+            }
+        }
+
+        if (!empty($active_conflicts)) {
+            add_action('admin_notices', function() use ($active_conflicts) {
+                echo '<div class="notice notice-warning is-dismissible">';
+                echo '<p><strong>Advanced SVG Animator:</strong> Detected active SVG plugins: ' . implode(', ', $active_conflicts) . '</p>';
+                echo '<p>SVG upload support has been automatically disabled to prevent conflicts. The animation and security features will still work.</p>';
+                echo '<p><a href="' . admin_url('tools.php?page=asa-svg-scanner') . '">Manage SVG Settings</a></p>';
+                echo '</div>';
+            });
+        }
     }
 
     /**
@@ -455,8 +501,19 @@ class ASA_Plugin {
      * @return array Modified MIME types with SVG support
      */
     public function enable_svg_mime_types($mimes) {
+        // Check if SVG support is already enabled by another plugin/theme
+        if (isset($mimes['svg']) && $mimes['svg'] === 'image/svg+xml') {
+            // SVG already supported, just return existing mimes
+            return $mimes;
+        }
+
         // Only allow SVG uploads for users with proper capabilities
         if (!$this->can_user_upload_svgs()) {
+            return $mimes;
+        }
+
+        // Check if we should enable SVG support (setting to disable conflicts)
+        if (!$this->should_enable_svg_support()) {
             return $mimes;
         }
 
@@ -529,6 +586,14 @@ class ASA_Plugin {
         if (!isset($file['type']) || $file['type'] !== 'image/svg+xml') {
             return $file;
         }
+
+        // Check if another plugin already processed this file
+        if (isset($file['asa_processed'])) {
+            return $file;
+        }
+
+        // Mark as processed to avoid double processing
+        $file['asa_processed'] = true;
 
         // Check if user has permission to upload SVGs
         if (!$this->can_user_upload_svgs()) {
@@ -1169,6 +1234,41 @@ class ASA_Plugin {
      */
     private function is_svg_sanitization_enabled() {
         return get_option('asa_sanitize_svg', true);
+    }
+
+    /**
+     * Check if plugin should enable SVG support (to avoid conflicts)
+     */
+    private function should_enable_svg_support() {
+        // Check if disabled via setting to avoid conflicts
+        if (!get_option('asa_enable_svg_support', true)) {
+            return false;
+        }
+
+        // Check if another popular SVG plugin is active
+        $conflicting_plugins = array(
+            'safe-svg/safe-svg.php',
+            'svg-support/svg-support.php', 
+            'enable-svg-uploads/enable-svg-uploads.php',
+            'wp-svg-icons/wp-svg-icons.php',
+            'svg-upload-and-sanitizer/svg-upload-and-sanitizer.php'
+        );
+
+        foreach ($conflicting_plugins as $plugin) {
+            if (is_plugin_active($plugin)) {
+                // Another SVG plugin is active, don't enable our SVG support
+                asa_log("SVG plugin conflict detected: {$plugin}. Disabling ASA SVG support.", 'warning');
+                return false;
+            }
+        }
+
+        // Check if theme has SVG support
+        if (current_theme_supports('svg')) {
+            asa_log('Theme has SVG support. Checking for conflicts.', 'info');
+            // Theme supports SVG, but we can still add our enhancements
+        }
+
+        return true;
     }
 
     /**
