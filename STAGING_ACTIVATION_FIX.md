@@ -116,6 +116,14 @@ private function load_admin_dependencies() {
 
 #### Known Plugin Conflicts
 
+**Permissions Error: "Sorry, you are not allowed to access this page"**
+- **Issue**: Users without administrator privileges can't access plugin settings
+- **Solution**: 
+  1. Ensure you're logged in as an Administrator
+  2. Or contact your site administrator to configure plugin settings
+  3. Plugin functionality works for all users, only settings require admin access
+- **Note**: Editor and Author roles can use SVG blocks but can't access admin settings
+
 **Connections Plugin Conflict (RESOLVED)**
 - **Issue**: Connections plugin loading textdomain too early causes activation conflicts
 - **Solution**: 
