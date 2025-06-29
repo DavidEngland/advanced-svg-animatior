@@ -40,7 +40,7 @@ define('ASA_TEXT_DOMAIN', 'advanced-svg-animator');
 
 // Debug mode - can be enabled in wp-config.php with: define('ASA_DEBUG', true);
 if (!defined('ASA_DEBUG')) {
-    define('ASA_DEBUG', false);
+    define('ASA_DEBUG', true); // Temporarily enabled for debugging
 }
 
 // Load logging functions
@@ -170,31 +170,13 @@ class ASA_Plugin {
             require_once ASA_INCLUDES_DIR . 'class-asa-simple-history-logger.php';
         }
         
-        // Load admin settings page - instantiate on admin_init to avoid early hook issues
+        // Load admin settings page - load early to ensure menu registration
         require_once ASA_INCLUDES_DIR . 'class-asa-admin-settings.php';
-        add_action('admin_init', array($this, 'init_admin_settings'), 5);
+        $this->admin_settings = new ASA_Admin_Settings();
 
-        // Load SVG security scanner admin - instantiate on admin_init to avoid early hook issues
+        // Load SVG security scanner admin
         require_once ASA_INCLUDES_DIR . 'class-asa-svg-scanner-admin.php';
-        add_action('admin_init', array($this, 'init_svg_scanner_admin'), 5);
-    }
-
-    /**
-     * Initialize admin settings - called on admin_init
-     */
-    public function init_admin_settings() {
-        if (!$this->admin_settings) {
-            $this->admin_settings = new ASA_Admin_Settings();
-        }
-    }
-
-    /**
-     * Initialize SVG scanner admin - called on admin_init
-     */
-    public function init_svg_scanner_admin() {
-        if (!$this->svg_scanner_admin) {
-            $this->svg_scanner_admin = new ASA_SVG_Scanner_Admin();
-        }
+        $this->svg_scanner_admin = new ASA_SVG_Scanner_Admin();
     }
 
     /**

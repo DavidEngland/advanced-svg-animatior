@@ -45,13 +45,46 @@ class ASA_Admin_Settings {
      * Add settings page to WordPress admin menu
      */
     public function add_settings_page() {
-        add_options_page(
+        // Debug: Check current user capabilities
+        if (ASA_DEBUG) {
+            error_log('ASA Debug: Current user can manage_options: ' . (current_user_can('manage_options') ? 'YES' : 'NO'));
+            error_log('ASA Debug: Current user ID: ' . get_current_user_id());
+            error_log('ASA Debug: Current user roles: ' . implode(', ', wp_get_current_user()->roles ?? []));
+        }
+        
+        // Use more flexible capability check for better compatibility
+        $capability = 'manage_options';
+        
+        $page_hook = add_options_page(
             __('Advanced SVG Animator Settings', ASA_TEXT_DOMAIN),
             __('SVG Animator', ASA_TEXT_DOMAIN),
-            'manage_options',
+            $capability,
             self::PAGE_SLUG,
             array($this, 'render_settings_page')
         );
+        
+        // Debug: Check if page was added successfully
+        if (ASA_DEBUG) {
+            error_log('ASA Debug: Settings page hook: ' . ($page_hook ? $page_hook : 'FAILED'));
+        }
+        
+        // If standard method failed, try alternative method
+        if (!$page_hook && $this->current_user_can_manage_plugin()) {
+            // Add as a top-level menu as fallback
+            $page_hook = add_menu_page(
+                __('SVG Animator Settings', ASA_TEXT_DOMAIN),
+                __('SVG Animator', ASA_TEXT_DOMAIN),
+                'read', // Lower capability requirement
+                self::PAGE_SLUG,
+                array($this, 'render_settings_page'),
+                'dashicons-art',
+                30
+            );
+            
+            if (ASA_DEBUG) {
+                error_log('ASA Debug: Fallback menu page hook: ' . ($page_hook ? $page_hook : 'ALSO FAILED'));
+            }
+        }
     }
 
     /**
@@ -189,9 +222,21 @@ class ASA_Admin_Settings {
      * Render the main settings page
      */
     public function render_settings_page() {
-        // Check user capabilities
-        if (!current_user_can('manage_options')) {
-            wp_die(__('You do not have sufficient permissions to access this page.', ASA_TEXT_DOMAIN));
+        // Check user capabilities with detailed error message
+        if (!$this->current_user_can_manage_plugin()) {
+            $user = wp_get_current_user();
+            $error_message = sprintf(
+                __('Access Denied: You do not have sufficient permissions to access this page. Current user: %s (ID: %d), Roles: %s. Required capability: manage_options', ASA_TEXT_DOMAIN),
+                $user->user_login,
+                $user->ID,
+                implode(', ', $user->roles ?? ['none'])
+            );
+            
+            if (ASA_DEBUG) {
+                error_log('ASA Debug: Settings page access denied - ' . $error_message);
+            }
+            
+            wp_die($error_message);
         }
 
         $options = $this->get_plugin_options();
@@ -608,6 +653,43 @@ class ASA_Admin_Settings {
             }
         }
 
+        return false;
+    }
+
+    /**
+     * Check if current user has admin capabilities
+     * Tries multiple capability checks for compatibility
+     */
+    public function current_user_can_manage_plugin() {
+        // Try multiple capabilities in order of preference
+        $capabilities = [
+            'manage_options',           // Standard admin capability
+            'activate_plugins',         // Plugin management capability
+            'edit_plugins',            // Plugin editing capability
+            'administrator'            // Direct role check (fallback)
+        ];
+        
+        foreach ($capabilities as $capability) {
+            if (current_user_can($capability)) {
+                if (ASA_DEBUG) {
+                    error_log("ASA Debug: User has capability: $capability");
+                }
+                return true;
+            }
+        }
+        
+        // Final fallback: check if user is in administrator role
+        $user = wp_get_current_user();
+        if (in_array('administrator', $user->roles ?? [])) {
+            if (ASA_DEBUG) {
+                error_log('ASA Debug: User has administrator role');
+            }
+            return true;
+        }
+        
+        if (ASA_DEBUG) {
+            error_log('ASA Debug: User does not have required capabilities');
+        }
         return false;
     }
 }
