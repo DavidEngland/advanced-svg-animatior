@@ -1,0 +1,87 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "advanced-svg-animator/typewriter-text",
+  "version": "1.0.0",
+  "title": "Typewriter Text",
+  "category": "text",
+  "icon": "edit",
+  "description": "Animated typewriter text effect with customizable typing speed and infinite loop.",
+  "example": {
+    "attributes": {
+      "text": "This text types out character by character...",
+      "typingSpeed": 100,
+      "deleteSpeed": 50,
+      "pauseEnd": 2000,
+      "pauseStart": 1000
+    }
+  },
+  "supports": {
+    "html": false,
+    "align": ["left", "center", "right", "wide", "full"],
+    "spacing": {
+      "margin": true,
+      "padding": true
+    },
+    "typography": {
+      "fontSize": true,
+      "lineHeight": true
+    },
+    "color": {
+      "text": true,
+      "background": true
+    }
+  },
+  "attributes": {
+    "text": {
+      "type": "string",
+      "default": "Type your message here..."
+    },
+    "typingSpeed": {
+      "type": "number",
+      "default": 100
+    },
+    "deleteSpeed": {
+      "type": "number",
+      "default": 50
+    },
+    "pauseEnd": {
+      "type": "number",
+      "default": 2000
+    },
+    "pauseStart": {
+      "type": "number",
+      "default": 1000
+    },
+    "showCursor": {
+      "type": "boolean",
+      "default": true
+    },
+    "cursorChar": {
+      "type": "string",
+      "default": "|"
+    },
+    "infiniteLoop": {
+      "type": "boolean",
+      "default": true
+    },
+    "fontSize": {
+      "type": "string"
+    },
+    "textColor": {
+      "type": "string"
+    },
+    "backgroundColor": {
+      "type": "string"
+    },
+    "fontFamily": {
+      "type": "string",
+      "default": "monospace"
+    }
+  },
+  "textdomain": "advanced-svg-animator",
+  "editorScript": "file:./index.js",
+  "editorStyle": "file:./editor.css",
+  "style": "file:./style.css",
+  "viewScript": "file:./view.js"
+}

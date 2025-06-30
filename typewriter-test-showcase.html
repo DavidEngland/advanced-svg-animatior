@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Typewriter Text Block Showcase</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            background: #f8f9fa;
+        }
+        
+        .showcase-section {
+            background: white;
+            border-radius: 12px;
+            padding: 30px;
+            margin: 30px 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .showcase-title {
+            color: #2c3e50;
+            border-bottom: 3px solid #3498db;
+            padding-bottom: 10px;
+            margin-bottom: 25px;
+        }
+        
+        .demo-container {
+            background: #f8f9fa;
+            border-left: 4px solid #3498db;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 0 8px 8px 0;
+        }
+        
+        .code-block {
+            background: #2d3748;
+            color: #e2e8f0;
+            padding: 20px;
+            border-radius: 8px;
+            font-family: 'Monaco', 'Menlo', monospace;
+            font-size: 14px;
+            overflow-x: auto;
+            margin: 15px 0;
+        }
+        
+        .copy-note {
+            background: #e8f5e8;
+            border: 1px solid #c3e6c3;
+            padding: 10px;
+            border-radius: 4px;
+            margin: 10px 0;
+            font-size: 14px;
+            color: #2d5a2d;
+        }
+    </style>
+</head>
+<body>
+    <h1>🎯 Typewriter Text Block Showcase</h1>
+    <p>Use these HTML snippets in WordPress Custom HTML blocks to test the typewriter functionality.</p>
+
+    <!-- Basic Demo -->
+    <div class="showcase-section">
+        <h2 class="showcase-title">📝 Basic Typewriter Demo</h2>
+        <div class="demo-container">
+            <div class="wp-block-advanced-svg-animator-typewriter-text">
+                <div class="typewriter-text-container" 
+                     data-text="Hello! This is a basic typewriter effect..."
+                     data-typing-speed="100"
+                     data-delete-speed="50"
+                     data-pause-end="2000"
+                     data-pause-start="1000"
+                     data-show-cursor="true"
+                     data-cursor-char="|"
+                     data-infinite-loop="true">
+                    <span class="typewriter-text" aria-live="polite"></span>
+                    <span class="typewriter-cursor" aria-hidden="true">|</span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="copy-note">
+            💡 Copy the code below and paste it into a Custom HTML block in WordPress:
+        </div>
+        
+        <div class="code-block">
+&lt;div class="wp-block-advanced-svg-animator-typewriter-text"&gt;
+    &lt;div class="typewriter-text-container" 
+         data-text="Hello! This is a basic typewriter effect..."
+         data-typing-speed="100"
+         data-delete-speed="50"
+         data-pause-end="2000"
+         data-pause-start="1000"
+         data-show-cursor="true"
+         data-cursor-char="|"
+         data-infinite-loop="true"&gt;
+        &lt;span class="typewriter-text" aria-live="polite"&gt;&lt;/span&gt;
+        &lt;span class="typewriter-cursor" aria-hidden="true"&gt;|&lt;/span&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+        </div>
+    </div>
+
+    <!-- Fast Typing Demo -->
+    <div class="showcase-section">
+        <h2 class="showcase-title">⚡ Fast Typing Demo</h2>
+        <div class="demo-container">
+            <div class="wp-block-advanced-svg-animator-typewriter-text">
+                <div class="typewriter-text-container" 
+                     data-text="I type really fast! Watch me go..."
+                     data-typing-speed="30"
+                     data-delete-speed="20"
+                     data-pause-end="1500"
+                     data-pause-start="500"
+                     data-show-cursor="true"
+                     data-cursor-char="▌"
+                     data-infinite-loop="true"
+                     style="font-family: 'Courier New', monospace; font-size: 18px; color: #27ae60;">
+                    <span class="typewriter-text" aria-live="polite"></span>
+                    <span class="typewriter-cursor" aria-hidden="true">▌</span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="code-block">
+&lt;div class="wp-block-advanced-svg-animator-typewriter-text"&gt;
+    &lt;div class="typewriter-text-container" 
+         data-text="I type really fast! Watch me go..."
+         data-typing-speed="30"
+         data-delete-speed="20"
+         data-pause-end="1500"
+         data-pause-start="500"
+         data-show-cursor="true"
+         data-cursor-char="▌"
+         data-infinite-loop="true"
+         style="font-family: 'Courier New', monospace; font-size: 18px; color: #27ae60;"&gt;
+        &lt;span class="typewriter-text" aria-live="polite"&gt;&lt;/span&gt;
+        &lt;span class="typewriter-cursor" aria-hidden="true"&gt;▌&lt;/span&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+        </div>
+    </div>
+
+    <!-- Slow Typewriter Demo -->
+    <div class="showcase-section">
+        <h2 class="showcase-title">🐌 Slow & Dramatic</h2>
+        <div class="demo-container">
+            <div class="wp-block-advanced-svg-animator-typewriter-text">
+                <div class="typewriter-text-container" 
+                     data-text="I... type... very... slowly... for... dramatic... effect..."
+                     data-typing-speed="200"
+                     data-delete-speed="100"
+                     data-pause-end="3000"
+                     data-pause-start="2000"
+                     data-show-cursor="true"
+                     data-cursor-char="_"
+                     data-infinite-loop="true"
+                     style="font-family: 'Georgia', serif; font-size: 24px; color: #8e44ad; font-weight: bold;">
+                    <span class="typewriter-text" aria-live="polite"></span>
+                    <span class="typewriter-cursor" aria-hidden="true">_</span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="code-block">
+&lt;div class="wp-block-advanced-svg-animator-typewriter-text"&gt;
+    &lt;div class="typewriter-text-container" 
+         data-text="I... type... very... slowly... for... dramatic... effect..."
+         data-typing-speed="200"
+         data-delete-speed="100"
+         data-pause-end="3000"
+         data-pause-start="2000"
+         data-show-cursor="true"
+         data-cursor-char="_"
+         data-infinite-loop="true"
+         style="font-family: 'Georgia', serif; font-size: 24px; color: #8e44ad; font-weight: bold;"&gt;
+        &lt;span class="typewriter-text" aria-live="polite"&gt;&lt;/span&gt;
+        &lt;span class="typewriter-cursor" aria-hidden="true"&gt;_&lt;/span&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+        </div>
+    </div>
+
+    <!-- No Cursor Demo -->
+    <div class="showcase-section">
+        <h2 class="showcase-title">👻 No Cursor Demo</h2>
+        <div class="demo-container">
+            <div class="wp-block-advanced-svg-animator-typewriter-text">
+                <div class="typewriter-text-container" 
+                     data-text="Clean typing without a cursor..."
+                     data-typing-speed="80"
+                     data-delete-speed="40"
+                     data-pause-end="2500"
+                     data-pause-start="1000"
+                     data-show-cursor="false"
+                     data-infinite-loop="true"
+                     style="font-family: 'Arial', sans-serif; font-size: 20px; color: #e74c3c;">
+                    <span class="typewriter-text" aria-live="polite"></span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="code-block">
+&lt;div class="wp-block-advanced-svg-animator-typewriter-text"&gt;
+    &lt;div class="typewriter-text-container" 
+         data-text="Clean typing without a cursor..."
+         data-typing-speed="80"
+         data-delete-speed="40"
+         data-pause-end="2500"
+         data-pause-start="1000"
+         data-show-cursor="false"
+         data-infinite-loop="true"
+         style="font-family: 'Arial', sans-serif; font-size: 20px; color: #e74c3c;"&gt;
+        &lt;span class="typewriter-text" aria-live="polite"&gt;&lt;/span&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+        </div>
+    </div>
+
+    <!-- Code Style Demo -->
+    <div class="showcase-section">
+        <h2 class="showcase-title">💻 Code Style Demo</h2>
+        <div class="demo-container">
+            <div class="wp-block-advanced-svg-animator-typewriter-text">
+                <div class="typewriter-text-container" 
+                     data-text="const message = 'Hello, World!'; console.log(message);"
+                     data-typing-speed="60"
+                     data-delete-speed="30"
+                     data-pause-end="3000"
+                     data-pause-start="1500"
+                     data-show-cursor="true"
+                     data-cursor-char="█"
+                     data-infinite-loop="true"
+                     style="font-family: 'Monaco', 'Consolas', monospace; font-size: 16px; color: #2ecc71; background: #2c3e50; padding: 15px; border-radius: 5px;">
+                    <span class="typewriter-text" aria-live="polite"></span>
+                    <span class="typewriter-cursor" aria-hidden="true">█</span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="code-block">
+&lt;div class="wp-block-advanced-svg-animator-typewriter-text"&gt;
+    &lt;div class="typewriter-text-container" 
+         data-text="const message = 'Hello, World!'; console.log(message);"
+         data-typing-speed="60"
+         data-delete-speed="30"
+         data-pause-end="3000"
+         data-pause-start="1500"
+         data-show-cursor="true"
+         data-cursor-char="█"
+         data-infinite-loop="true"
+         style="font-family: 'Monaco', 'Consolas', monospace; font-size: 16px; color: #2ecc71; background: #2c3e50; padding: 15px; border-radius: 5px;"&gt;
+        &lt;span class="typewriter-text" aria-live="polite"&gt;&lt;/span&gt;
+        &lt;span class="typewriter-cursor" aria-hidden="true"&gt;█&lt;/span&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+        </div>
+    </div>
+
+    <!-- Quote Style Demo -->
+    <div class="showcase-section">
+        <h2 class="showcase-title">💬 Quote Style Demo</h2>
+        <div class="demo-container">
+            <div class="wp-block-advanced-svg-animator-typewriter-text">
+                <div class="typewriter-text-container" 
+                     data-text="&quot;The future belongs to those who believe in the beauty of their dreams.&quot; - Eleanor Roosevelt"
+                     data-typing-speed="70"
+                     data-delete-speed="35"
+                     data-pause-end="4000"
+                     data-pause-start="2000"
+                     data-show-cursor="true"
+                     data-cursor-char="❘"
+                     data-infinite-loop="true"
+                     style="font-family: 'Times New Roman', serif; font-size: 22px; color: #34495e; font-style: italic; text-align: center; max-width: 600px; margin: 0 auto;">
+                    <span class="typewriter-text" aria-live="polite"></span>
+                    <span class="typewriter-cursor" aria-hidden="true">❘</span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="code-block">
+&lt;div class="wp-block-advanced-svg-animator-typewriter-text"&gt;
+    &lt;div class="typewriter-text-container" 
+         data-text="&amp;quot;The future belongs to those who believe in the beauty of their dreams.&amp;quot; - Eleanor Roosevelt"
+         data-typing-speed="70"
+         data-delete-speed="35"
+         data-pause-end="4000"
+         data-pause-start="2000"
+         data-show-cursor="true"
+         data-cursor-char="❘"
+         data-infinite-loop="true"
+         style="font-family: 'Times New Roman', serif; font-size: 22px; color: #34495e; font-style: italic; text-align: center; max-width: 600px; margin: 0 auto;"&gt;
+        &lt;span class="typewriter-text" aria-live="polite"&gt;&lt;/span&gt;
+        &lt;span class="typewriter-cursor" aria-hidden="true"&gt;❘&lt;/span&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+        </div>
+    </div>
+
+    <!-- Instructions -->
+    <div class="showcase-section">
+        <h2 class="showcase-title">📋 How to Use in WordPress</h2>
+        <ol style="font-size: 16px; line-height: 1.8;">
+            <li><strong>Go to your WordPress editor</strong> (Block Editor/Gutenberg)</li>
+            <li><strong>Add a Custom HTML block</strong> by clicking the "+" button and searching for "Custom HTML"</li>
+            <li><strong>Copy any of the HTML snippets above</strong> and paste them into the Custom HTML block</li>
+            <li><strong>Preview or publish</strong> your page to see the typewriter effect in action</li>
+        </ol>
+        
+        <h3>📝 Customization Options:</h3>
+        <ul style="font-size: 14px; line-height: 1.6;">
+            <li><code>data-text</code> - The text to type out</li>
+            <li><code>data-typing-speed</code> - Speed in milliseconds between each character (lower = faster)</li>
+            <li><code>data-delete-speed</code> - Speed of deleting characters</li>
+            <li><code>data-pause-end</code> - Pause duration after typing completes</li>
+            <li><code>data-pause-start</code> - Pause duration before starting to delete</li>
+            <li><code>data-show-cursor</code> - Show/hide the cursor (true/false)</li>
+            <li><code>data-cursor-char</code> - Custom cursor character (|, _, █, ▌, etc.)</li>
+            <li><code>data-infinite-loop</code> - Whether to loop infinitely (true/false)</li>
+        </ul>
+    </div>
+
+    <script>
+        // Include the typewriter animation script inline for testing
+        // This will be loaded from view.js in the actual WordPress block
+        class TypewriterTextAnimation {
+            constructor(element, config = {}) {
+                this.element = element;
+                this.textElement = element.querySelector('.typewriter-text');
+                this.cursorElement = element.querySelector('.typewriter-cursor');
+                
+                this.config = {
+                    text: config.text || element.dataset.text || 'Sample text...',
+                    typingSpeed: parseInt(config.typingSpeed || element.dataset.typingSpeed) || 100,
+                    deleteSpeed: parseInt(config.deleteSpeed || element.dataset.deleteSpeed) || 50,
+                    pauseEnd: parseInt(config.pauseEnd || element.dataset.pauseEnd) || 2000,
+                    pauseStart: parseInt(config.pauseStart || element.dataset.pauseStart) || 1000,
+                    showCursor: config.showCursor !== false && element.dataset.showCursor !== 'false',
+                    cursorChar: config.cursorChar || element.dataset.cursorChar || '|',
+                    infiniteLoop: config.infiniteLoop !== false && element.dataset.infiniteLoop !== 'false',
+                    ...config
+                };
+                
+                this.currentIndex = 0;
+                this.isTyping = false;
+                this.isDeleting = false;
+                this.timeoutId = null;
+                
+                this.init();
+            }
+            
+            init() {
+                if (this.textElement) {
+                    this.textElement.textContent = '';
+                }
+                
+                if (this.cursorElement) {
+                    this.cursorElement.textContent = this.config.showCursor ? this.config.cursorChar : '';
+                    this.cursorElement.style.display = this.config.showCursor ? 'inline-block' : 'none';
+                }
+                
+                this.element.setAttribute('data-typewriter-active', 'true');
+                this.startTyping();
+            }
+            
+            startTyping() {
+                if (this.isTyping) return;
+                
+                this.isTyping = true;
+                this.isDeleting = false;
+                this.typeCharacter();
+            }
+            
+            typeCharacter() {
+                if (!this.isTyping || this.isDeleting) return;
+                
+                const targetText = this.config.text;
+                const currentText = this.textElement.textContent;
+                
+                if (this.currentIndex < targetText.length) {
+                    this.textElement.textContent = targetText.substring(0, this.currentIndex + 1);
+                    this.currentIndex++;
+                    
+                    this.timeoutId = setTimeout(() => this.typeCharacter(), this.config.typingSpeed);
+                } else {
+                    this.isTyping = false;
+                    
+                    if (this.config.infiniteLoop) {
+                        this.timeoutId = setTimeout(() => this.startDeleting(), this.config.pauseEnd);
+                    }
+                }
+            }
+            
+            startDeleting() {
+                if (this.isDeleting) return;
+                
+                this.isDeleting = true;
+                this.deleteCharacter();
+            }
+            
+            deleteCharacter() {
+                if (!this.isDeleting) return;
+                
+                const currentText = this.textElement.textContent;
+                
+                if (currentText.length > 0) {
+                    this.textElement.textContent = currentText.substring(0, currentText.length - 1);
+                    this.currentIndex--;
+                    
+                    this.timeoutId = setTimeout(() => this.deleteCharacter(), this.config.deleteSpeed);
+                } else {
+                    this.isDeleting = false;
+                    this.currentIndex = 0;
+                    
+                    this.timeoutId = setTimeout(() => this.startTyping(), this.config.pauseStart);
+                }
+            }
+        }
+        
+        // Initialize typewriter animations when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            const typewriterBlocks = document.querySelectorAll('.typewriter-text-container');
+            
+            typewriterBlocks.forEach(block => {
+                if (block.typewriterInstance) return;
+                block.typewriterInstance = new TypewriterTextAnimation(block);
+            });
+        });
+    </script>
+</body>
+</html>

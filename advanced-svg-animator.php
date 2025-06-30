@@ -68,6 +68,11 @@ class ASA_Plugin {
      * @var ASA_SVG_Scanner_Admin
      */
     private $svg_scanner_admin = null;
+    
+    /**
+     * Flag to prevent duplicate block registration
+     */
+    private $blocks_registered = false;
 
     /**
      * Get the single instance of the plugin
@@ -92,14 +97,23 @@ class ASA_Plugin {
      * Initialize WordPress hooks
      */
     private function init_hooks() {
-        // Core plugin hooks
-        add_action('init', array($this, 'init_plugin'));
-        add_action('admin_init', array($this, 'admin_init'));
+        // Minimal hooks to prevent memory issues
+        
+        // Block registration happens on init
+        add_action('init', array($this, 'register_blocks'));
+
+        // Basic frontend scripts only
         add_action('wp_enqueue_scripts', array($this, 'enqueue_frontend_scripts'));
+        
+        // Temporarily disable admin hooks and complex functionality
+        // TODO: Re-enable these when memory issues are resolved
+        
+        /*
+        // Core plugin hooks - REMOVED init_plugin to prevent duplicate initialization
+        add_action('admin_init', array($this, 'admin_init'));
         add_action('admin_enqueue_scripts', array($this, 'enqueue_admin_scripts'));
 
-        // Block registration hooks
-        add_action('init', array($this, 'register_blocks'));
+        // Block editor assets
         add_action('enqueue_block_editor_assets', array($this, 'enqueue_block_editor_assets'));
 
         // REST API hooks
@@ -118,11 +132,7 @@ class ASA_Plugin {
         add_action('asa_scheduled_svg_scan', array($this, 'perform_enhanced_scheduled_scan'));
         add_action('init', array($this, 'schedule_svg_scans'));
         add_action('init', array($this, 'register_custom_cron_schedules'));
-
-        // Plugin lifecycle hooks
-        register_activation_hook(ASA_PLUGIN_FILE, array($this, 'activate_plugin'));
-        register_deactivation_hook(ASA_PLUGIN_FILE, array($this, 'deactivate_plugin'));
-        register_uninstall_hook(ASA_PLUGIN_FILE, array('ASA_Plugin', 'uninstall_plugin'));
+        */
     }
 
     /**
@@ -157,6 +167,10 @@ class ASA_Plugin {
      * Load admin-specific dependencies
      */
     private function load_admin_dependencies() {
+        // Temporarily disable admin dependencies to prevent memory issues
+        // TODO: Re-enable these when memory issues are resolved
+        
+        /*
         // Load Simple History logger integration (only if file exists)
         if (file_exists(ASA_INCLUDES_DIR . 'class-asa-simple-history-logger.php')) {
             require_once ASA_INCLUDES_DIR . 'class-asa-simple-history-logger.php';
@@ -169,6 +183,7 @@ class ASA_Plugin {
         // Load SVG security scanner admin
         require_once ASA_INCLUDES_DIR . 'class-asa-svg-scanner-admin.php';
         $this->svg_scanner_admin = new ASA_SVG_Scanner_Admin();
+        */
     }
 
     /**
@@ -216,6 +231,8 @@ class ASA_Plugin {
      */
     private function init_components() {
         // Initialize main plugin components
+        // Note: Block registration now happens directly on the 'init' hook
+        
         // This will be expanded as components are added
     }
 
@@ -290,23 +307,35 @@ class ASA_Plugin {
      * Register Gutenberg blocks
      */
     public function register_blocks() {
+        // Prevent duplicate registration
+        if ($this->blocks_registered) {
+            return;
+        }
+        
         // Check if function exists (WordPress 5.0+)
         if (!function_exists('register_block_type')) {
             return;
         }
 
-        // Register the original SVG Animator block (if block.json exists)
+        // Register ONLY the SVG Animator block
         if (file_exists(ASA_PLUGIN_DIR . 'blocks/svg-animator/block.json')) {
+            // Use block.json if it exists
             register_block_type(ASA_PLUGIN_DIR . 'blocks/svg-animator');
+        } else {
+            // Fallback to manual registration if block.json doesn't exist
+            register_block_type('advanced-svg-animator/svg-animator', array(
+                'editor_script' => 'asa-svg-animator-simple-block',
+                'editor_style' => 'asa-svg-animator-block-editor',
+                'style' => 'asa-svg-animator-frontend',
+                'render_callback' => array($this, 'render_simple_svg_block')
+            ));
         }
-
-        // Register the simple SVG Animator block
-        register_block_type('advanced-svg-animator/svg-animator', array(
-            'editor_script' => 'asa-svg-animator-simple-block',
-            'editor_style' => 'asa-svg-animator-block-editor',
-            'style' => 'asa-svg-animator-frontend',
-            'render_callback' => array($this, 'render_simple_svg_block')
-        ));
+        
+        // Mark blocks as registered
+        $this->blocks_registered = true;
+        
+        // Log successful registration
+        asa_log('SVG Animator block registered successfully', 'info');
     }
 
     /**
@@ -1465,32 +1494,42 @@ class ASA_Plugin {
  * Initialize the plugin when WordPress is ready
  */
 function asa_init_plugin() {
-        return ASA_Plugin::get_instance();
-    }
+    // Create and initialize the plugin instance
+    $plugin = ASA_Plugin::get_instance();
+    
+    // Load text domain for translations
+    load_plugin_textdomain(
+        ASA_TEXT_DOMAIN,
+        false,
+        dirname(ASA_PLUGIN_BASENAME) . '/languages'
+    );
+    
+    return $plugin;
+}
 
-    /**
-     * Plugin activation hook
-     */
-    function asa_activate() {
-        ASA_Plugin::get_instance()->activate_plugin();
-    }
+/**
+ * Plugin activation hook
+ */
+function asa_activate() {
+    ASA_Plugin::get_instance()->activate_plugin();
+}
 
-    /**
-     * Plugin deactivation hook
-     */
-    function asa_deactivate() {
-        ASA_Plugin::get_instance()->deactivate_plugin();
-    }
+/**
+ * Plugin deactivation hook
+ */
+function asa_deactivate() {
+    ASA_Plugin::get_instance()->deactivate_plugin();
+}
 
-    /**
-     * Plugin uninstallation hook
-     */
-    function asa_uninstall() {
-        ASA_Plugin::get_instance()->uninstall_plugin();
-    }
+/**
+ * Plugin uninstallation hook
+ */
+function asa_uninstall() {
+    ASA_Plugin::get_instance()->uninstall_plugin();
+}
 
-// Initialize plugin on WordPress init
-add_action('init', 'asa_init_plugin');
+// Initialize plugin on plugins_loaded hook for proper timing
+add_action('plugins_loaded', 'asa_init_plugin', 10);
 
 // Register activation, deactivation, and uninstall hooks
 register_activation_hook(__FILE__, 'asa_activate');

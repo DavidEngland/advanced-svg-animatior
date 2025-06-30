@@ -1,0 +1,80 @@
+/* Frontend styles for Typewriter Text block */
+.wp-block-advanced-svg-animator-typewriter-text {
+    position: relative;
+    display: block;
+    line-height: 1.4;
+}
+
+.typewriter-text-container {
+    position: relative;
+    display: inline-block;
+    min-height: 1.2em;
+}
+
+.typewriter-text {
+    font-family: inherit;
+    font-size: inherit;
+    color: inherit;
+    background: inherit;
+    display: inline;
+    vertical-align: baseline;
+}
+
+.typewriter-cursor {
+    display: inline-block;
+    animation: typewriter-blink 1s infinite step-end;
+    vertical-align: baseline;
+    opacity: 1;
+}
+
+.typewriter-cursor.hidden {
+    opacity: 0;
+}
+
+@keyframes typewriter-blink {
+    0%, 50% { 
+        opacity: 1; 
+    }
+    51%, 100% { 
+        opacity: 0; 
+    }
+}
+
+/* Accessibility: Respect reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+    .typewriter-cursor {
+        animation: none !important;
+        opacity: 0.7;
+    }
+    
+    .typewriter-text-container[data-typewriter-active] {
+        /* Show full text immediately for users who prefer reduced motion */
+    }
+}
+
+/* Theme integration */
+.wp-block-advanced-svg-animator-typewriter-text.has-text-color .typewriter-text {
+    color: inherit;
+}
+
+.wp-block-advanced-svg-animator-typewriter-text.has-background {
+    padding: 1em;
+    border-radius: 0.25em;
+}
+
+/* Font size classes */
+.wp-block-advanced-svg-animator-typewriter-text.has-small-font-size {
+    font-size: 0.8em;
+}
+
+.wp-block-advanced-svg-animator-typewriter-text.has-medium-font-size {
+    font-size: 1em;
+}
+
+.wp-block-advanced-svg-animator-typewriter-text.has-large-font-size {
+    font-size: 1.25em;
+}
+
+.wp-block-advanced-svg-animator-typewriter-text.has-x-large-font-size {
+    font-size: 1.5em;
+}
