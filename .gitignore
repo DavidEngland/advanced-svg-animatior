@@ -15,13 +15,12 @@ wp-content/cache/supercache/
 .DS_Store
 Thumbs.db
 node_modules/
-vendor/
+# vendor/ - Comment out to bundle Composer dependencies
 .env
 .env.local
 
 # Composer files (exclude lock for WordPress plugins)
-composer.lock
-package-lock.json
+*.lock
 
 # IDE files
 .vscode/

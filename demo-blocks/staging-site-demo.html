@@ -1,0 +1,490 @@
+<!-- Real Estate SVG Icon Showcase - WordPress Block Content -->
+<!-- Copy and paste this content into your WordPress block editor -->
+
+<!-- wp:group {"className":"real-estate-svg-showcase","style":{"spacing":{"padding":{"top":"var:preset|spacing|50","bottom":"var:preset|spacing|50","left":"var:preset|spacing|40","right":"var:preset|spacing|40"}}},"backgroundColor":"white","layout":{"type":"constrained","contentSize":"1000px"}} -->
+<div class="wp-block-group real-estate-svg-showcase has-white-background-color has-background" style="padding-top:var(--wp--preset--spacing--50);padding-right:var(--wp--preset--spacing--40);padding-bottom:var(--wp--preset--spacing--50);padding-left:var(--wp--preset--spacing--40)">
+
+<!-- wp:heading {"textAlign":"center","level":2,"style":{"typography":{"fontSize":"2.5rem","fontWeight":"700"}},"textColor":"dark-gray"} -->
+<h2 class="wp-block-heading has-text-align-center has-dark-gray-color has-text-color" style="font-size:2.5rem;font-weight:700">Advanced SVG Animator Demo</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph {"align":"center","style":{"typography":{"fontSize":"1.2rem","lineHeight":"1.6"}},"textColor":"medium-gray"} -->
+<p class="has-text-align-center has-medium-gray-color has-text-color" style="font-size:1.2rem;line-height:1.6">Professional animated SVG icons for real estate websites - powered by Advanced SVG Animator</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:spacer {"height":"30px"} -->
+<div style="height:30px" aria-hidden="true" class="wp-block-spacer"></div>
+<!-- /wp:spacer -->
+
+<!-- wp:columns {"style":{"spacing":{"blockGap":{"top":"var:preset|spacing|40","left":"var:preset|spacing|40"}}}} -->
+<div class="wp-block-columns">
+
+<!-- wp:column {"width":"50%"} -->
+<div class="wp-block-column" style="flex-basis:50%">
+
+<!-- wp:group {"className":"icon-showcase-section","style":{"border":{"radius":"12px","width":"1px","color":"#e5e7eb"},"spacing":{"padding":{"top":"var:preset|spacing|40","bottom":"var:preset|spacing|40","left":"var:preset|spacing|30","right":"var:preset|spacing|30"}}},"backgroundColor":"gray-50","layout":{"type":"constrained"}} -->
+<div class="wp-block-group icon-showcase-section has-border-color has-gray-50-background-color has-background" style="border-color:#e5e7eb;border-width:1px;border-radius:12px;padding-top:var(--wp--preset--spacing--40);padding-right:var(--wp--preset--spacing--30);padding-bottom:var(--wp--preset--spacing--40);padding-left:var(--wp--preset--spacing--30)">
+
+<!-- wp:heading {"textAlign":"center","level":3,"style":{"typography":{"fontSize":"1.5rem","fontWeight":"600"}},"textColor":"dark-gray"} -->
+<h3 class="wp-block-heading has-text-align-center has-dark-gray-color has-text-color" style="font-size:1.5rem;font-weight:600">Animated Real Estate Icons</h3>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph {"align":"center","style":{"typography":{"fontSize":"0.9rem"}},"textColor":"medium-gray"} -->
+<p class="has-text-align-center has-medium-gray-color has-text-color" style="font-size:0.9rem">Rich animated icons with gradient effects and smooth transitions</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:html -->
+<div class="asa-icon-showcase">
+    <!-- Animated House with breathing effect -->
+    <div class="asa-icon-item">
+        <div class="asa-icon-container" data-animation="pulse">
+            <svg width="80" height="80" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" class="asa-animated-svg">
+                <defs>
+                    <linearGradient id="houseWall" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" style="stop-color:#3B82F6">
+                            <animate attributeName="stop-color" values="#3B82F6;#60A5FA;#3B82F6" dur="4s" repeatCount="indefinite"/>
+                        </stop>
+                        <stop offset="100%" style="stop-color:#1E40AF">
+                            <animate attributeName="stop-color" values="#1E40AF;#3B82F6;#1E40AF" dur="4s" repeatCount="indefinite"/>
+                        </stop>
+                    </linearGradient>
+                    <linearGradient id="roofGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" style="stop-color:#DC2626"/>
+                        <stop offset="100%" style="stop-color:#991B1B"/>
+                    </linearGradient>
+                </defs>
+                
+                <!-- House body -->
+                <rect x="25" y="45" width="50" height="40" fill="url(#houseWall)" rx="2">
+                    <animateTransform attributeName="transform" type="scale" values="1;1.05;1" dur="3s" repeatCount="indefinite"/>
+                </rect>
+                
+                <!-- Roof -->
+                <polygon points="20,45 50,20 80,45" fill="url(#roofGrad)">
+                    <animate attributeName="fill-opacity" values="1;0.8;1" dur="2s" repeatCount="indefinite"/>
+                </polygon>
+                
+                <!-- Door -->
+                <rect x="45" y="70" width="10" height="15" fill="#8B4513" rx="1">
+                    <animate attributeName="fill" values="#8B4513;#A0522D;#8B4513" dur="3s" repeatCount="indefinite"/>
+                </rect>
+                
+                <!-- Windows with light effects -->
+                <rect x="30" y="55" width="8" height="8" fill="#FFD700" rx="1">
+                    <animate attributeName="fill" values="#FFD700;#FFF8DC;#FFD700" dur="2s" begin="0s" repeatCount="indefinite"/>
+                </rect>
+                <rect x="62" y="55" width="8" height="8" fill="#FFD700" rx="1">
+                    <animate attributeName="fill" values="#FFD700;#FFF8DC;#FFD700" dur="2s" begin="1s" repeatCount="indefinite"/>
+                </rect>
+                
+                <!-- Chimney with smoke -->
+                <rect x="65" y="25" width="6" height="15" fill="#8B4513"/>
+                <circle cx="68" cy="20" r="2" fill="#D3D3D3" opacity="0.6">
+                    <animate attributeName="cy" values="20;10;5" dur="3s" repeatCount="indefinite"/>
+                    <animate attributeName="opacity" values="0.6;0.2;0" dur="3s" repeatCount="indefinite"/>
+                </circle>
+            </svg>
+        </div>
+        <p class="asa-icon-label">Dream Home</p>
+    </div>
+    
+    <!-- For Sale Sign with swing animation -->
+    <div class="asa-icon-item">
+        <div class="asa-icon-container" data-animation="swing">
+            <svg width="80" height="80" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" class="asa-animated-svg">
+                <defs>
+                    <linearGradient id="signBoard" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" style="stop-color:#EF4444"/>
+                        <stop offset="100%" style="stop-color:#DC2626"/>
+                    </linearGradient>
+                </defs>
+                
+                <!-- Post -->
+                <rect x="47" y="35" width="6" height="55" fill="#8B4513">
+                    <animateTransform attributeName="transform" type="rotate" values="0 50 62.5;2 50 62.5;-2 50 62.5;0 50 62.5" dur="4s" repeatCount="indefinite"/>
+                </rect>
+                
+                <!-- Sign board -->
+                <rect x="25" y="15" width="50" height="25" fill="url(#signBoard)" rx="3">
+                    <animate attributeName="fill-opacity" values="1;0.9;1" dur="2s" repeatCount="indefinite"/>
+                </rect>
+                
+                <!-- Sign text -->
+                <text x="50" y="25" text-anchor="middle" font-family="Arial, sans-serif" font-size="7" font-weight="bold" fill="white">FOR</text>
+                <text x="50" y="34" text-anchor="middle" font-family="Arial, sans-serif" font-size="7" font-weight="bold" fill="white">SALE</text>
+            </svg>
+        </div>
+        <p class="asa-icon-label">For Sale</p>
+    </div>
+    
+    <!-- Golden Key with rotation -->
+    <div class="asa-icon-item">
+        <div class="asa-icon-container" data-animation="rotate">
+            <svg width="80" height="80" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" class="asa-animated-svg">
+                <defs>
+                    <radialGradient id="keyGradient" cx="50%" cy="50%" r="50%">
+                        <stop offset="0%" style="stop-color:#FBBF24"/>
+                        <stop offset="50%" style="stop-color:#F59E0B"/>
+                        <stop offset="100%" style="stop-color:#D97706"/>
+                    </radialGradient>
+                </defs>
+                
+                <!-- Key head -->
+                <circle cx="25" cy="50" r="15" fill="url(#keyGradient)">
+                    <animateTransform attributeName="transform" type="rotate" values="0 25 50;360 25 50" dur="6s" repeatCount="indefinite"/>
+                </circle>
+                
+                <!-- Inner circle -->
+                <circle cx="25" cy="50" r="8" fill="none" stroke="#B45309" stroke-width="2"/>
+                
+                <!-- Key shaft -->
+                <rect x="35" y="47" width="40" height="6" fill="url(#keyGradient)" rx="3"/>
+                
+                <!-- Key teeth -->
+                <rect x="70" y="53" width="5" height="8" fill="url(#keyGradient)"/>
+                <rect x="65" y="53" width="3" height="5" fill="url(#keyGradient)"/>
+                
+                <!-- Sparkle effects -->
+                <circle cx="60" cy="40" r="1.5" fill="#FFF">
+                    <animate attributeName="opacity" values="0;1;0" dur="2s" begin="0s" repeatCount="indefinite"/>
+                </circle>
+                <circle cx="35" cy="35" r="1" fill="#FFF">
+                    <animate attributeName="opacity" values="0;1;0" dur="2s" begin="1s" repeatCount="indefinite"/>
+                </circle>
+            </svg>
+        </div>
+        <p class="asa-icon-label">Property Access</p>
+    </div>
+</div>
+<!-- /wp:html -->
+
+</div>
+<!-- /wp:group -->
+
+</div>
+<!-- /wp:column -->
+
+<!-- wp:column {"width":"50%"} -->
+<div class="wp-block-column" style="flex-basis:50%">
+
+<!-- wp:group {"className":"icon-showcase-section","style":{"border":{"radius":"12px","width":"1px","color":"#e5e7eb"},"spacing":{"padding":{"top":"var:preset|spacing|40","bottom":"var:preset|spacing|40","left":"var:preset|spacing|30","right":"var:preset|spacing|30"}}},"backgroundColor":"gray-50","layout":{"type":"constrained"}} -->
+<div class="wp-block-group icon-showcase-section has-border-color has-gray-50-background-color has-background" style="border-color:#e5e7eb;border-width:1px;border-radius:12px;padding-top:var(--wp--preset--spacing--40);padding-right:var(--wp--preset--spacing--30);padding-bottom:var(--wp--preset--spacing--40);padding-left:var(--wp--preset--spacing--30)">
+
+<!-- wp:heading {"textAlign":"center","level":3,"style":{"typography":{"fontSize":"1.5rem","fontWeight":"600"}},"textColor":"dark-gray"} -->
+<h3 class="wp-block-heading has-text-align-center has-dark-gray-color has-text-color" style="font-size:1.5rem;font-weight:600">Minimalist Line Icons</h3>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph {"align":"center","style":{"typography":{"fontSize":"0.9rem"}},"textColor":"medium-gray"} -->
+<p class="has-text-align-center has-medium-gray-color has-text-color" style="font-size:0.9rem">Clean line art with subtle hover effects and breathing animations</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:html -->
+<div class="asa-icon-showcase line-style">
+    <!-- Line House with subtle animation -->
+    <div class="asa-icon-item">
+        <div class="asa-icon-container" data-animation="fadeIn">
+            <svg width="80" height="80" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" class="asa-animated-svg">
+                <!-- House body -->
+                <rect x="25" y="45" width="50" height="40" fill="none" stroke="currentColor" stroke-width="2.5" rx="2">
+                    <animateTransform attributeName="transform" type="scale" values="1;1.02;1" dur="4s" repeatCount="indefinite"/>
+                </rect>
+                
+                <!-- Roof -->
+                <polygon points="20,45 50,20 80,45" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linejoin="round">
+                    <animate attributeName="stroke-opacity" values="1;0.6;1" dur="3s" repeatCount="indefinite"/>
+                </polygon>
+                
+                <!-- Door -->
+                <rect x="45" y="70" width="10" height="15" fill="none" stroke="currentColor" stroke-width="2"/>
+                
+                <!-- Windows with pulse effect -->
+                <rect x="30" y="55" width="8" height="8" fill="none" stroke="currentColor" stroke-width="2">
+                    <animate attributeName="stroke-width" values="2;3;2" dur="3s" begin="0s" repeatCount="indefinite"/>
+                </rect>
+                <rect x="62" y="55" width="8" height="8" fill="none" stroke="currentColor" stroke-width="2">
+                    <animate attributeName="stroke-width" values="2;3;2" dur="3s" begin="1.5s" repeatCount="indefinite"/>
+                </rect>
+            </svg>
+        </div>
+        <p class="asa-icon-label">Home Outline</p>
+    </div>
+    
+    <!-- Location Pin with ripple effect -->
+    <div class="asa-icon-item">
+        <div class="asa-icon-container" data-animation="bounce">
+            <svg width="80" height="80" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" class="asa-animated-svg">
+                <!-- Pin shape -->
+                <path d="M50 15 C60 15 68 23 68 33 C68 43 50 75 50 75 C50 75 32 43 32 33 C32 23 40 15 50 15 Z" 
+                      fill="none" stroke="currentColor" stroke-width="2.5" stroke-linejoin="round">
+                    <animateTransform attributeName="transform" type="scale" values="1;1.1;1" dur="2.5s" repeatCount="indefinite"/>
+                </path>
+                
+                <!-- Inner dot -->
+                <circle cx="50" cy="33" r="8" fill="none" stroke="currentColor" stroke-width="2">
+                    <animate attributeName="r" values="8;10;8" dur="2.5s" repeatCount="indefinite"/>
+                </circle>
+                
+                <!-- Ripple effects -->
+                <circle cx="50" cy="33" r="20" fill="none" stroke="currentColor" stroke-width="1" stroke-opacity="0">
+                    <animate attributeName="r" values="15;35" dur="3s" repeatCount="indefinite"/>
+                    <animate attributeName="stroke-opacity" values="0.5;0" dur="3s" repeatCount="indefinite"/>
+                </circle>
+            </svg>
+        </div>
+        <p class="asa-icon-label">Location Pin</p>
+    </div>
+    
+    <!-- Key with floating effect -->
+    <div class="asa-icon-item">
+        <div class="asa-icon-container" data-animation="float">
+            <svg width="80" height="80" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" class="asa-animated-svg">
+                <!-- Key head -->
+                <circle cx="25" cy="50" r="12" fill="none" stroke="currentColor" stroke-width="2.5">
+                    <animateTransform attributeName="transform" type="rotate" values="0 25 50;360 25 50" dur="8s" repeatCount="indefinite"/>
+                </circle>
+                
+                <!-- Inner pattern -->
+                <circle cx="25" cy="50" r="6" fill="none" stroke="currentColor" stroke-width="1.5">
+                    <animate attributeName="stroke-opacity" values="1;0.4;1" dur="3s" repeatCount="indefinite"/>
+                </circle>
+                
+                <!-- Key shaft -->
+                <rect x="35" y="47" width="35" height="6" fill="none" stroke="currentColor" stroke-width="2.5" rx="3"/>
+                
+                <!-- Key teeth -->
+                <rect x="65" y="53" width="5" height="6" fill="none" stroke="currentColor" stroke-width="2"/>
+                <rect x="60" y="53" width="3" height="4" fill="none" stroke="currentColor" stroke-width="2"/>
+                
+                <!-- Floating effect -->
+                <animateTransform attributeName="transform" type="translate" values="0 0;0 -3;0 0" dur="3s" repeatCount="indefinite"/>
+            </svg>
+        </div>
+        <p class="asa-icon-label">Access Key</p>
+    </div>
+</div>
+<!-- /wp:html -->
+
+</div>
+<!-- /wp:group -->
+
+</div>
+<!-- /wp:column -->
+
+</div>
+<!-- /wp:columns -->
+
+<!-- wp:spacer {"height":"40px"} -->
+<div style="height:40px" aria-hidden="true" class="wp-block-spacer"></div>
+<!-- /wp:spacer -->
+
+<!-- wp:group {"className":"plugin-features","style":{"border":{"radius":"12px","width":"1px","color":"#e5e7eb"},"spacing":{"padding":{"top":"var:preset|spacing|40","bottom":"var:preset|spacing|40","left":"var:preset|spacing|40","right":"var:preset|spacing|40"}}},"backgroundColor":"gray-50","layout":{"type":"constrained"}} -->
+<div class="wp-block-group plugin-features has-border-color has-gray-50-background-color has-background" style="border-color:#e5e7eb;border-width:1px;border-radius:12px;padding-top:var(--wp--preset--spacing--40);padding-right:var(--wp--preset--spacing--40);padding-bottom:var(--wp--preset--spacing--40);padding-left:var(--wp--preset--spacing--40)">
+
+<!-- wp:heading {"textAlign":"center","level":3,"style":{"typography":{"fontSize":"1.8rem","fontWeight":"600"}},"textColor":"dark-gray"} -->
+<h3 class="wp-block-heading has-text-align-center has-dark-gray-color has-text-color" style="font-size:1.8rem;font-weight:600">Advanced SVG Animator Features</h3>
+<!-- /wp:heading -->
+
+<!-- wp:columns {"style":{"spacing":{"blockGap":{"top":"var:preset|spacing|30","left":"var:preset|spacing|30"}}}} -->
+<div class="wp-block-columns">
+
+<!-- wp:column -->
+<div class="wp-block-column">
+
+<!-- wp:list {"style":{"typography":{"fontSize":"1rem","lineHeight":"1.7"}},"textColor":"medium-gray"} -->
+<ul class="has-medium-gray-color has-text-color" style="font-size:1rem;line-height:1.7">
+<li><strong>🔒 Security Scanner:</strong> Automatic SVG sanitization and threat detection</li>
+<li><strong>🎨 Animation Library:</strong> Pre-built animations for any use case</li>
+<li><strong>🧩 Gutenberg Blocks:</strong> Easy drag-and-drop SVG animations</li>
+<li><strong>🏠 REIA Optimized:</strong> Built specifically for real estate</li>
+</ul>
+<!-- /wp:list -->
+
+</div>
+<!-- /wp:column -->
+
+<!-- wp:column -->
+<div class="wp-block-column">
+
+<!-- wp:list {"style":{"typography":{"fontSize":"1rem","lineHeight":"1.7"}},"textColor":"medium-gray"} -->
+<ul class="has-medium-gray-color has-text-color" style="font-size:1rem;line-height:1.7">
+<li><strong>⚡ Performance:</strong> Lightweight and optimized for speed</li>
+<li><strong>📱 Responsive:</strong> Perfect on all devices and screen sizes</li>
+<li><strong>🔧 Conflict Detection:</strong> Smart plugin compatibility system</li>
+<li><strong>📊 Simple History:</strong> Complete activity logging integration</li>
+</ul>
+<!-- /wp:list -->
+
+</div>
+<!-- /wp:column -->
+
+</div>
+<!-- /wp:columns -->
+
+<!-- wp:spacer {"height":"20px"} -->
+<div style="height:20px" aria-hidden="true" class="wp-block-spacer"></div>
+<!-- /wp:spacer -->
+
+<!-- wp:paragraph {"align":"center","style":{"typography":{"fontSize":"0.9rem","fontStyle":"italic"}},"textColor":"medium-gray"} -->
+<p class="has-text-align-center has-medium-gray-color has-text-color" style="font-size:0.9rem;font-style:italic">🔗 GitHub: <strong>https://github.com/DavidEngland/advanced-svg-animatior</strong> | Built by REIA for professional real estate websites</p>
+<!-- /wp:paragraph -->
+
+</div>
+<!-- /wp:group -->
+
+</div>
+<!-- /wp:group -->
+
+<!-- Custom CSS for the showcase (add to Additional CSS or theme) -->
+<style>
+.real-estate-svg-showcase {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+.asa-icon-showcase {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 1.5rem;
+    margin: 20px 0;
+}
+
+.asa-icon-item {
+    text-align: center;
+}
+
+.asa-icon-container {
+    background: white;
+    border-radius: 12px;
+    padding: 15px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    transition: all 0.3s ease;
+    margin-bottom: 10px;
+    color: #333;
+    cursor: pointer;
+}
+
+.asa-icon-container:hover {
+    transform: translateY(-5px) scale(1.02);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+}
+
+.line-style .asa-icon-container {
+    color: #4a5568;
+}
+
+.line-style .asa-icon-container:hover {
+    color: #2d3748;
+    background: #f8fafc;
+}
+
+.asa-icon-label {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #4a5568;
+    margin: 0;
+    padding: 0;
+    transition: color 0.3s ease;
+}
+
+.asa-icon-container:hover + .asa-icon-label {
+    color: #2d3748;
+}
+
+.icon-showcase-section {
+    transition: transform 0.3s ease;
+}
+
+.icon-showcase-section:hover {
+    transform: translateY(-3px);
+}
+
+/* Enhanced animations for ASA plugin integration */
+.asa-animated-svg {
+    width: 100%;
+    height: 100%;
+    overflow: visible;
+}
+
+/* Animation trigger classes for ASA integration */
+.asa-icon-container[data-animation="pulse"] svg {
+    animation: asaPulse 2s ease-in-out infinite;
+}
+
+.asa-icon-container[data-animation="bounce"] svg {
+    animation: asaBounce 2s ease-in-out infinite;
+}
+
+.asa-icon-container[data-animation="rotate"] svg {
+    animation: asaRotate 4s linear infinite;
+}
+
+.asa-icon-container[data-animation="float"] svg {
+    animation: asaFloat 3s ease-in-out infinite;
+}
+
+.asa-icon-container[data-animation="swing"] svg {
+    animation: asaSwing 2s ease-in-out infinite;
+}
+
+@keyframes asaPulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+}
+
+@keyframes asaBounce {
+    0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+    40% { transform: translateY(-10px); }
+    60% { transform: translateY(-5px); }
+}
+
+@keyframes asaRotate {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+@keyframes asaFloat {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-8px); }
+}
+
+@keyframes asaSwing {
+    0%, 100% { transform: rotate(0deg); }
+    25% { transform: rotate(2deg); }
+    75% { transform: rotate(-2deg); }
+}
+
+@media (max-width: 768px) {
+    .asa-icon-showcase {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1rem;
+    }
+    
+    .asa-icon-container {
+        padding: 10px;
+    }
+}
+
+/* Accessibility: Respect user motion preferences */
+@media (prefers-reduced-motion: reduce) {
+    .asa-icon-container svg *,
+    .asa-icon-container svg,
+    .asa-animated-svg * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+    
+    .asa-icon-container {
+        transition: none !important;
+    }
+    
+    .icon-showcase-section {
+        transition: none !important;
+    }
+}
+
+/* Plugin status indicator */
+.plugin-features {
+    background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+    border: 2px solid #cbd5e0;
+}
+</style>

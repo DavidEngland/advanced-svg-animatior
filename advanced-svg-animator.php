@@ -1,9 +1,9 @@
 <?php
 /**
  * Plugin Name: Advanced SVG Animator
- * Plugin URI: https://github.com/DavidEngland/advanced-svg-animatior
+ * Plugin URI: https://github.com/DavidEngland/advanced-svg-animator
  * Description: A comprehensive WordPress plugin for advanced SVG animations with security scanner and real estate icon library. Built by Real Estate Intelligence Agency (REIA) for professional WordPress sites.
- * Version: 2.0.1
+ * Version: 1.0.0
  * Author: David England
  * Author URI: https://realestate-huntsville.com
  * License: GPL v2 or later
@@ -14,7 +14,7 @@
  * Tested up to: 6.4
  * Requires PHP: 7.4
  * Network: false
- * GitHub Plugin URI: DavidEngland/advanced-svg-animatior
+ * GitHub Plugin URI: DavidEngland/advanced-svg-animator
  */
 
 // Prevent direct file access
@@ -23,7 +23,7 @@ if (!defined('ABSPATH')) {
 }
 
 // Define plugin constants
-define('ASA_VERSION', '2.0.1');
+define('ASA_VERSION', '1.0.0');
 define('ASA_PLUGIN_FILE', __FILE__);
 define('ASA_PLUGIN_DIR', plugin_dir_path(__FILE__));
 define('ASA_PLUGIN_URL', plugin_dir_url(__FILE__));
@@ -40,7 +40,7 @@ define('ASA_TEXT_DOMAIN', 'advanced-svg-animator');
 
 // Debug mode - can be enabled in wp-config.php with: define('ASA_DEBUG', true);
 if (!defined('ASA_DEBUG')) {
-    define('ASA_DEBUG', true); // Temporarily enabled for debugging
+    define('ASA_DEBUG', false);
 }
 
 // Load logging functions
@@ -81,24 +81,20 @@ class ASA_Plugin {
     }
 
     /**
-     * Constructor - Set up plugin hooks only
+     * Constructor - Set up plugin hooks
      */
     private function __construct() {
         $this->init_hooks();
-        // Dependencies will be loaded when WordPress is ready
+        $this->load_dependencies();
     }
 
     /**
      * Initialize WordPress hooks
      */
     private function init_hooks() {
-        // Load textdomain early but safely
-        add_action('init', array($this, 'load_textdomain'), 1);
-        
-        // Core plugin hooks - use later priorities to avoid conflicts
-        add_action('init', array($this, 'init_plugin'), 25);
-        add_action('admin_menu', array($this, 'early_admin_init'), 5); // Load admin classes just before menu
-        add_action('admin_init', array($this, 'admin_init'), 15);
+        // Core plugin hooks
+        add_action('init', array($this, 'init_plugin'));
+        add_action('admin_init', array($this, 'admin_init'));
         add_action('wp_enqueue_scripts', array($this, 'enqueue_frontend_scripts'));
         add_action('admin_enqueue_scripts', array($this, 'enqueue_admin_scripts'));
 
@@ -152,16 +148,8 @@ class ASA_Plugin {
         if (file_exists(ASA_PLUGIN_DIR . 'vendor/autoload.php')) {
             require_once ASA_PLUGIN_DIR . 'vendor/autoload.php';
         } else {
-            // Check if custom implementation exists before loading
-            $sanitizer_file = ASA_INCLUDES_DIR . 'class-asa-svg-sanitizer.php';
-            if (file_exists($sanitizer_file)) {
-                require_once $sanitizer_file;
-            } else {
-                // Log warning but don't fail - SVG sanitization will use WordPress defaults
-                if (function_exists('error_log')) {
-                    error_log('ASA Warning: SVG sanitizer file not found, using WordPress defaults');
-                }
-            }
+            // Fallback: Load our custom implementation
+            require_once ASA_INCLUDES_DIR . 'class-asa-svg-sanitizer.php';
         }
     }
 
@@ -174,7 +162,7 @@ class ASA_Plugin {
             require_once ASA_INCLUDES_DIR . 'class-asa-simple-history-logger.php';
         }
         
-        // Load admin settings page - load early to ensure menu registration
+        // Load admin settings page
         require_once ASA_INCLUDES_DIR . 'class-asa-admin-settings.php';
         $this->admin_settings = new ASA_Admin_Settings();
 
@@ -195,52 +183,15 @@ class ASA_Plugin {
      * Initialize the plugin
      */
     public function init_plugin() {
-        // Load remaining dependencies (frontend only, admin already loaded in early_admin_init)
-        if (!is_admin()) {
-            $this->load_svg_sanitizer();
-            $this->load_frontend_dependencies();
-        }
-
-        // Initialize plugin components
-        $this->init_components();
-    }
-
-    /**
-     * Early admin initialization - load admin classes just before admin_menu
-     */
-    public function early_admin_init() {
-        if (ASA_DEBUG) {
-            error_log('ASA Debug: early_admin_init() called via admin_menu hook');
-        }
-        
-        // Only proceed if we're in admin and haven't already loaded dependencies
-        if (is_admin() && !$this->admin_settings) {
-            // Load SVG sanitization library first
-            $this->load_svg_sanitizer();
-            
-            // Load admin dependencies 
-            $this->load_admin_dependencies();
-            
-            if (ASA_DEBUG) {
-                error_log('ASA Debug: Admin dependencies loaded in early_admin_init()');
-                error_log('ASA Debug: Admin settings instance: ' . (is_object($this->admin_settings) ? 'Created' : 'Failed'));
-            }
-        }
-    }
-
-    /**
-     * Load plugin text domain for translations
-     */
-    public function load_textdomain() {
+        // Load text domain for translations
         load_plugin_textdomain(
             ASA_TEXT_DOMAIN,
             false,
             dirname(ASA_PLUGIN_BASENAME) . '/languages'
         );
-        
-        if (ASA_DEBUG) {
-            error_log('ASA Debug: Text domain loaded at init priority 1');
-        }
+
+        // Initialize plugin components
+        $this->init_components();
     }
 
     /**
@@ -317,12 +268,8 @@ class ASA_Plugin {
                 ) . '</p>';
                 echo '<p>' . esc_html__('SVG upload support has been automatically disabled to prevent conflicts. Animation and security features will still work.', ASA_TEXT_DOMAIN) . '</p>';
                 echo '<p>';
-                if (current_user_can('manage_options')) {
-                    echo '<a href="' . esc_url(admin_url('options-general.php?page=asa-settings')) . '" class="button button-secondary">' . esc_html__('Manage Settings', ASA_TEXT_DOMAIN) . '</a> ';
-                    echo '<a href="' . esc_url(admin_url('tools.php?page=asa-svg-scanner')) . '" class="button button-secondary">' . esc_html__('SVG Scanner', ASA_TEXT_DOMAIN) . '</a>';
-                } else {
-                    echo '<em>' . esc_html__('Contact your administrator to manage plugin settings.', ASA_TEXT_DOMAIN) . '</em>';
-                }
+                echo '<a href="' . esc_url(admin_url('options-general.php?page=asa-settings')) . '" class="button button-secondary">' . esc_html__('Manage Settings', ASA_TEXT_DOMAIN) . '</a> ';
+                echo '<a href="' . esc_url(admin_url('tools.php?page=asa-svg-scanner')) . '" class="button button-secondary">' . esc_html__('SVG Scanner', ASA_TEXT_DOMAIN) . '</a>';
                 echo '</p>';
                 echo '</div>';
             });
@@ -332,11 +279,7 @@ class ASA_Plugin {
                 echo '<p><strong>' . esc_html__('Advanced SVG Animator - SVG Support Detected', ASA_TEXT_DOMAIN) . '</strong></p>';
                 echo '<p>' . esc_html__('SVG uploads are already enabled by your theme or another plugin. ASA\'s animation and security features are active.', ASA_TEXT_DOMAIN) . '</p>';
                 echo '<p>';
-                if (current_user_can('manage_options')) {
-                    echo '<a href="' . esc_url(admin_url('options-general.php?page=asa-settings')) . '" class="button button-secondary">' . esc_html__('Configure Settings', ASA_TEXT_DOMAIN) . '</a>';
-                } else {
-                    echo '<em>' . esc_html__('Contact your administrator to configure plugin settings.', ASA_TEXT_DOMAIN) . '</em>';
-                }
+                echo '<a href="' . esc_url(admin_url('options-general.php?page=asa-settings')) . '" class="button button-secondary">' . esc_html__('Configure Settings', ASA_TEXT_DOMAIN) . '</a>';
                 echo '</p>';
                 echo '</div>';
             });
@@ -1522,35 +1465,35 @@ class ASA_Plugin {
  * Initialize the plugin when WordPress is ready
  */
 function asa_init_plugin() {
-    return ASA_Plugin::get_instance();
-}
+        return ASA_Plugin::get_instance();
+    }
 
-/**
- * Plugin activation hook
- */
-function asa_activate() {
-    ASA_Plugin::get_instance()->activate_plugin();
-}
+    /**
+     * Plugin activation hook
+     */
+    function asa_activate() {
+        ASA_Plugin::get_instance()->activate_plugin();
+    }
 
-/**
- * Plugin deactivation hook
- */
-function asa_deactivate() {
-    ASA_Plugin::get_instance()->deactivate_plugin();
-}
+    /**
+     * Plugin deactivation hook
+     */
+    function asa_deactivate() {
+        ASA_Plugin::get_instance()->deactivate_plugin();
+    }
 
-/**
- * Plugin uninstallation hook
- */
-function asa_uninstall() {
-    ASA_Plugin::get_instance()->uninstall_plugin();
-}
+    /**
+     * Plugin uninstallation hook
+     */
+    function asa_uninstall() {
+        ASA_Plugin::get_instance()->uninstall_plugin();
+    }
+
+// Initialize plugin on WordPress init
+add_action('init', 'asa_init_plugin');
 
 // Register activation, deactivation, and uninstall hooks
 register_activation_hook(__FILE__, 'asa_activate');
 register_deactivation_hook(__FILE__, 'asa_deactivate');
 register_uninstall_hook(__FILE__, 'asa_uninstall');
-
-// Initialize the plugin properly - use init hook instead of plugins_loaded to avoid conflicts
-add_action('init', 'asa_init_plugin', 20); // Higher priority to load after other plugins
 
