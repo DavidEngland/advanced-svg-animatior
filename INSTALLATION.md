@@ -1,5 +1,7 @@
 # Advanced SVG Animator - Installation Guide
 
+> **✅ Latest Update**: Repository now includes bundled Composer dependencies (`vendor/`) for immediate end-user installation. No additional setup required for WordPress site owners!
+
 ## 🚀 Quick Install (End Users)
 
 ### WordPress.org Installation
